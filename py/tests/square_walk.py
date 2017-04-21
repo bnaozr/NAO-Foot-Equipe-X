@@ -22,7 +22,7 @@ if (len(sys.argv) >= 3):
 print robotIp
 print robotPort
 
-squareSideLength = 1.0  # square of 50 cm sides
+squareSideLength = 1.0  # square of 100 cm sides
 # Init proxies.
 try:
     motionProxy = ALProxy("ALMotion", robotIp, robotPort)
@@ -48,6 +48,7 @@ except Exception, e:
 # using wakeUp (new feature in 1.14.1)
 motionProxy.wakeUp()
 
+motionProxy.setStiffnesses("Body", 1.0)
 
 # Send NAO to Pose Init : it not standing then standing up
 postureProxy.goToPosture("StandInit", 0.5)
@@ -75,7 +76,8 @@ for iloop in range (4):
     x = squareSideLength
     y = 0.0
     theta = 0.0
-    motionProxy.moveTo (x, y, theta)
+    #motionProxy.moveTo (x, y, theta)
 
 # End Walk (putting NAO at rest position to save power)
+motionProxy.setStiffnesses("Body", 0.0)
 motionProxy.rest()

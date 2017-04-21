@@ -35,7 +35,7 @@ except Exception, e:
     print "Could not create proxy to ALSonar"
     print "Error was: ", e
 
-for i in range(20):
+for i in range(200):
     sonarProxy.subscribe("SonarApp");
     time.sleep(0.25)
     valL = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
