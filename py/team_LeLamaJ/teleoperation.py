@@ -9,18 +9,25 @@ pygame.init()
 pygame.display.set_mode((100, 100))
 
 # use keyboard to control the fsm
-#  s : event "Wait"
-#  e : event "Stop"
-#  _ : event "Start" (barre d'espace)
+
+#  Enter : event "Start"
+#  Echap : event "Stop"
+
+#  c : event "Wait"
+
 #  z : event "Go" 
 #  q : event "Turn_left"
 #  d : event "Turn_right"
+#  a : event "SideStep_Left"
+#  e : event "SideStep_Right"
+#  1 : event "Shoot_Left" (pavé numérique : 1)
+#  2 : event "Shoot_Right" (pavé numérique : 2)
 
 # global variables
 f = fsm.fsm();  # finite state machine
 
 def getKey():
-    c='e'
+    c='c'
     cok=False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -34,10 +41,20 @@ def getKey():
                 cok, c = True, "s"
             elif event.key == pygame.K_d:
                 cok, c = True, "d"
+            elif event.key == pygame.K_a:
+                cok, c = True, "a"
             elif event.key == pygame.K_e:
                 cok, c = True, "e"
-            elif event.key == pygame.K_space:
-                cok, c = True, " "
+            elif event.key == pygame.K_c:
+                cok, c = True, "c"
+            elif event.key == pygame.K_return:
+                cok, c = True, "enter"
+            elif event.key == pygame.K_escape:
+                cok, c = True, "echap"
+            elif event.key == pygame.K_KP1:
+                cok, c = True, "1"
+            elif event.key == pygame.K_KP2:
+                cok, c = True, "2"
     return cok,c
 
 # functions (actions of the fsm)
@@ -51,7 +68,7 @@ def doRun():
     if newKey:
         if val=="z":
             event="Go"  # new event if key "s" is pressed
-        elif val=="e":
+        elif val=="echap":
             event="Stop"
         elif val=="d":
             event="Turn_Right"
@@ -67,7 +84,7 @@ def doWait():
     if newKey:
         if val=="z":
             event="Go"  # new event if key "z" is pressed
-        elif val=="e":
+        elif val=="echap":
             event="Stop"
         elif val=="d":
             event="Turn_Right"
