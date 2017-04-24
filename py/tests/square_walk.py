@@ -76,7 +76,7 @@ for iloop in range (4):
     x = squareSideLength
     y = 0.0
     theta = 0.0
-    #motionProxy.moveTo (x, y, theta)
+    motionProxy.moveTo (x, y, theta)
 
 # End Walk (putting NAO at rest position to save power)
 motionProxy.setStiffnesses("Body", 0.0)
