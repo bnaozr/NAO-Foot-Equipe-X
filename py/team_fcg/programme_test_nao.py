@@ -14,7 +14,7 @@ robotPORT=9559
 #9559 pour robot reel
 
 
-robotIP = "172.20.16.13"
+robotIP = "172.20.14.200"
 #127.0.0.1 pour simulateur
 
 #11212 pour simulateur
@@ -24,7 +24,7 @@ from naoqi import ALProxy
 
 tts = ALProxy("ALTextToSpeech", robotIP, robotPORT)
 tts.setLanguage("French")
-tts.say("que les meilleurs perdent")
+tts.say("Ce genre de match de foot mamaine") #Ce genre de match de foot mamaine
 
 
 
@@ -96,9 +96,9 @@ def getKey():
             elif event.key == pygame.K_DOWN:
                 c="b"  
             elif event.key == pygame.K_a:
-                c="kick_gauche"
+                c="kg"
             elif event.key == pygame.K_e:
-                c="kick_droite"            
+                c="kd"            
     return cok,c
     
 
@@ -184,21 +184,21 @@ def dowait():
             event="g"
         elif val=="b":
             event="b"
-        elif val=="kick_gauche":
-            event="kick_gauche"
-        elif val=="kick_droite":
-            event="kick_droite"
+        elif val=="kg":
+            event="kg"
+        elif val=="kd":
+            event="kd"
     return event
 
 def dotirerdugauche():
     print ">>>>>> action : tir du gauche en cours"
-    naocmd.kick_gauche(motionProxy)  #C'est l'autre groupe qui la fournira
+    naocmd.kick_gauche(postureProxy, motionProxy)  #C'est l'autre groupe qui la fournira
     event="w"
     return event
     
 def dotirerdudroit():
     print ">>>>>> action : tir du droit en cours"
-    naocmd.kick_droit(motionProxy)  #C'est l'autre groupe qui la fournira
+    naocmd.kick_droit(postureProxy, motionProxy)  #C'est l'autre groupe qui la fournira
     event="w"
     return event
     
@@ -220,6 +220,7 @@ if __name__== "__main__":
     f.add_state("stop")
     f.add_state("tir_du_gauche")
     f.add_state("tir_du_droit")
+    f.add_state("reculer")
     # defines the events 
     f.add_event ("w") #attente
     # add here all the events you need
@@ -247,7 +248,7 @@ if __name__== "__main__":
     f.add_transition ("rotation_G","Idle","w",dowait)
     f.add_transition ("rotation_D","rotation_D","r",doright)
     f.add_transition ("rotation_D","Idle","w",dowait)
-    f.add_transition ("Stop","Idle","w",dowait)
+    f.add_transition ("stop","Idle","w",dowait)
     f.add_transition ("Idle","tir_du_gauche","kg",dotirerdugauche)
     f.add_transition ("Idle","tir_du_droit","kd",dotirerdudroit)    
     f.add_transition ("tir_du_gauche","Idle","w",dowait)     
