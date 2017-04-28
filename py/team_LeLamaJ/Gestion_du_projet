@@ -10,7 +10,7 @@ Pour gérer le projet, les tâches sont réparties de la manière suivante:
       nao_cmd.py
     Description:
     
-  Evitement automatique des autres robots (détection par ultrasons, etc...): arslanan, lefevrlu
+  Evitement automatique des autres robots (détection par ultrasons, etc...): arslanan, lefevrlu, ThamerAldoughaish, jasserAlassaf
   
     Nom du(des) fichier(s) Python: 
       woz_evitement.py
