@@ -8,11 +8,11 @@ import math
 pygame.init()
 pygame.display.set_mode((100, 100))
 
-robotIp="localhost"
-robotPort=11212
+#robotIp="localhost"
+#robotPort=11212
 
-#robotIp="172.20.28.198"
-#robotPort=9559
+robotIp="172.20.12.134"
+robotPort=9559
 
 if (len(sys.argv) >= 2):
     robotIp = sys.argv[1]
