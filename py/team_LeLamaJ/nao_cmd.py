@@ -4,10 +4,19 @@ import time
 from naoqi import ALProxy
 import math
 
-
+def StiffnessOn(proxy):
+    # We use the "Body" name to signify the collection of all joints
+    pNames = "Body"
+    pStiffnessLists = 1.0
+    pTimeLists = 1.0
+    proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
+    
 def initialisation():
-    robotIp="localhost"
-    robotPort=11212
+    """robotIp="localhost"
+    robotPort=11212"""
+    robotIp="172.20.28.198"
+    robotPort=9559
+    tts = ALProxy("ALTextToSpeech", robotIp, robotPort)
     
     try:
         global motionProxy
@@ -23,10 +32,14 @@ def initialisation():
         print ("Could not create proxy to ALRobotPosture")
         print ("Error was: ", e)
         
+    StiffnessOn(motionProxy)   
     motionProxy.wakeUp()
     postureProxy.goToPosture("StandInit", 0.5)
     motionProxy.setWalkArmsEnabled(True, True)
     motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
+    tts.say("Les lamas vaincront")
+    tts.say("Je s'appelle Groot")
+    tts.say("I am Groot")
 
 def veille():
     motionProxy.rest()
