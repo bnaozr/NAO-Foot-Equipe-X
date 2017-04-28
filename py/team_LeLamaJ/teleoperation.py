@@ -21,8 +21,8 @@ pygame.display.set_mode((100, 100))
 #  d : event "Turn_right"
 #  a : event "SideStep_Left"
 #  e : event "SideStep_Right"
-#  1 : event "Shoot_Left" (pavé numérique : 1)
-#  2 : event "Shoot_Right" (pavé numérique : 2)
+#  1 : event "Shoot_Left" (pave numerique : 1)
+#  2 : event "Shoot_Right" (pave numerique : 2)
 
 # global variables
 f = fsm.fsm();  # finite state machine
@@ -252,7 +252,7 @@ def doGo_Back():
             event="Shoot_Right"
     return event
 
-## Fonctions à venir :
+## Fonctions a venir :
     
 def doShoot_Right():
     pass
