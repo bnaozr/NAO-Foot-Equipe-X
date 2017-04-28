@@ -93,7 +93,6 @@ def main(robotIP):
 
     proxy.positionInterpolation(effectorName, space, targetList,
                                  axisMask, times, isAbsolute)
-    proxy.say("I'm groot")
 
 #    # Example showing how to Enable Effector Control as an Optimization
 #    isActive     = False

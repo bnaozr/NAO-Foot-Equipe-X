@@ -6,6 +6,7 @@ import pygame
 import nao_cmd as nc
 import test_droit as td
 import test_gauche as tg
+from naoqi import ALProxy
 pygame.init()
 
 # draw a little area (to focus on to get keys)
@@ -13,6 +14,7 @@ pygame.display.set_mode((100, 100))
 
 robotIp="172.20.28.198"
 robotPort=9559
+tts = ALProxy("ALTextToSpeech", robotIp, robotPort)
 
 # use keyboard to control the fsm
 
@@ -254,6 +256,7 @@ def doGo_Back():
     return event
 
 def doShoot_Right():
+    tts.say("Les ENSIETA baisent comme des dieux")
     print(">>>>>> action : shoot right")
     td.main(robotIp)
     newKey,val = getKey(); 
@@ -278,6 +281,7 @@ def doShoot_Right():
     return event
 
 def doShoot_Left():
+    tts.say("Pizza Trad Pizza Trad")
     print(">>>>>> action : shoot left")
     tg.main(robotIp)
     newKey,val = getKey(); 
