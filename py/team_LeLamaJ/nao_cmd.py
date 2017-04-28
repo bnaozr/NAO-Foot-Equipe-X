@@ -12,16 +12,16 @@ def initialisation():
     try:
         global motionProxy
         motionProxy = ALProxy("ALMotion", robotIp, robotPort)
-    except Exception, e:
-        print "Could not create proxy to ALMotion"
-        print "Error was: ", e
+    except Exception as e:
+        print ("Could not create proxy to ALMotion")
+        print ("Error was: ", e)
     
     try:
         global postureProxy
         postureProxy = ALProxy("ALRobotPosture", robotIp, robotPort)
-    except Exception, e:
-        print "Could not create proxy to ALRobotPosture"
-        print "Error was: ", e
+    except Exception as e:
+        print ("Could not create proxy to ALRobotPosture")
+        print ("Error was: ", e)
         
     motionProxy.wakeUp()
     postureProxy.goToPosture("StandInit", 0.5)
@@ -64,7 +64,55 @@ def marche_arriere():
     motionProxy.moveTo (x, y, theta)
     
 def pas_cote_droit():
+    motionProxy.wakeUp()
+    postureProxy.goToPosture("StandInit", 0.5)
+    footStepsList = []
+
+    footStepsList.append([["RLeg"], [[0.00, -0.16, 0.0]]])
+
+    footStepsList.append([["LLeg"], [[0.00, 0.1, 0.0]]])
+
+    footStepsList.append([["RLeg"], [[0.00, -0.16, 0.0]]])
+
+    footStepsList.append([["LLeg"], [[0.04, 0.1, 0.0]]])
+
+    stepFrequency = 0.8
+    clearExisting = False
+    nbStepDance = 4 
+
+    for j in range( nbStepDance ):
+        for i in range( len(footStepsList) ):
+            motionProxy.setFootStepsWithSpeed(
+                footStepsList[i][0],
+                footStepsList[i][1],
+                [stepFrequency],
+                clearExisting)
+    
     pass
 
 def pas_cote_gauche():
-    pass
+    motionProxy.wakeUp()
+    postureProxy.goToPosture("StandInit", 0.5)
+    # On definit les pas un par un
+    footStepsList = []
+
+    footStepsList.append([["LLeg"], [[0.00, 0.16, 0.0]]])
+
+    footStepsList.append([["RLeg"], [[0.00, -0.1, 0.0]]])
+    
+    footStepsList.append([["LLeg"], [[0.00, 0.16, 0.0]]])
+
+    footStepsList.append([["RLeg"], [[-0.04, -0.1, 0.0]]])
+
+    # Le nao bouge ses pieds un par un 
+    stepFrequency = 0.8
+    clearExisting = False
+    nbStepDance = 4 # on lui demande de faire 4 pas de cote
+
+    for j in range( nbStepDance ):
+        for i in range( len(footStepsList) ):
+            motionProxy.setFootStepsWithSpeed(
+                footStepsList[i][0],
+                footStepsList[i][1],
+                [stepFrequency],
+                clearExisting)

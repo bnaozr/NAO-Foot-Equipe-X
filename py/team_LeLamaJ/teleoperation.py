@@ -79,7 +79,7 @@ def doRun():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -105,7 +105,7 @@ def doWait():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -145,7 +145,7 @@ def doTurn_Right():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -170,7 +170,7 @@ def doTurn_Left():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -195,7 +195,7 @@ def doSideStep_Right():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -220,7 +220,7 @@ def doSideStep_Left():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -245,7 +245,7 @@ def doGo_Back():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
