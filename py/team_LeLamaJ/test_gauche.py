@@ -11,7 +11,6 @@ import motion
 import time
 import math
 from naoqi import ALProxy
-
 robotIP = '172.20.28.198'
 
 def StiffnessOn(proxy):
@@ -20,6 +19,7 @@ def StiffnessOn(proxy):
     pStiffnessLists = 1.0
     pTimeLists = 1.0
     proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
+
     
 
 def main(robotIP):
@@ -61,21 +61,21 @@ def main(robotIP):
     supportLeg = "Legs"
     proxy.wbEnableBalanceConstraint(isEnable, supportLeg)
 
-    # Com go to LLeg
-    supportLeg = "LLeg"
-    duration   = 2.0
-    proxy.wbGoToBalance(supportLeg, duration)
-
-    # RLeg is free
-    stateName  = "Free"
-    supportLeg = "RLeg"
-    proxy.wbFootState(stateName, supportLeg)
-
+#    # Com go to LLeg
+#    supportLeg = "LLeg"
+#    duration   = 2.0
+#    proxy.wbGoToBalance(supportLeg, duration)
+#
+#    # RLeg is free
+#    stateName  = "Free"
+#    supportLeg = "RLeg"
+#    proxy.wbFootState(stateName, supportLeg)
+#
     # RLeg is optimized
     effectorName = "RLeg"
     axisMask     = 63
     space        = motion.FRAME_ROBOT
-
+#
 
     # Motion of the RLeg
     dx      = 0.05                 # translation axis X (meters)
@@ -91,29 +91,29 @@ def main(robotIP):
       [+dx, 0.0, dz, 0.0, 0.0, 0.0],
       [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
 
-    proxy.positionInterpolation(effectorName, space, targetList,
-                                 axisMask, times, isAbsolute)
-    proxy.say("I'm groot")
-
-#    # Example showing how to Enable Effector Control as an Optimization
-#    isActive     = False
-#    proxy.wbEnableEffectorOptimization(effectorName, isActive)
-#
-#    # Com go to LLeg
-#    supportLeg = "RLeg"
-#    duration   = 2.0
-#    proxy.wbGoToBalance(supportLeg, duration)
-#
-#    # RLeg is free
-#    stateName  = "Free"
-#    supportLeg = "LLeg"
-#    proxy.wbFootState(stateName, supportLeg)
-#
-#    effectorName = "LLeg"
 #    proxy.positionInterpolation(effectorName, space, targetList,
-#                                axisMask, times, isAbsolute)
-#
-#    time.sleep(1.0)
+#                                 axisMask, times, isAbsolute)
+
+
+    # Example showing how to Enable Effector Control as an Optimization
+    isActive     = False
+    proxy.wbEnableEffectorOptimization(effectorName, isActive)
+
+    # Com go to LLeg
+    supportLeg = "RLeg"
+    duration   = 2.0
+    proxy.wbGoToBalance(supportLeg, duration)
+
+    # RLeg is free
+    stateName  = "Free"
+    supportLeg = "LLeg"
+    proxy.wbFootState(stateName, supportLeg)
+
+    effectorName = "LLeg"
+    proxy.positionInterpolation(effectorName, space, targetList,
+                                axisMask, times, isAbsolute)
+
+    time.sleep(1.0)
 
     # Deactivate Head tracking
     isEnabled    = False
