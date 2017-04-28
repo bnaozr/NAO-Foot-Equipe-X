@@ -5,8 +5,10 @@ from naoqi import ALProxy
 import math
 
 
-robotIp="localhost"
-robotPort=11212
+"""robotIp="localhost"
+robotPort=11212"""
+robotIp="172.20.28.198"
+robotPort=9559
 
 try:
     motionProxy = ALProxy("ALMotion", robotIp, robotPort)
@@ -33,6 +35,8 @@ def eviter():
     sonarL = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
     sonarR = memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value")
     for i in range(4):
+        print("SonarL",sonarL)
+        print("SonarR",sonarR)
     #    while sonarL > 0.5 and sonarR > 0.5:
     #        x = 0.2
     #        y = 0.0

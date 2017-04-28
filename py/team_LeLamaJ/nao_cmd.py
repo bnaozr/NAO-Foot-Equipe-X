@@ -37,9 +37,8 @@ def initialisation():
     postureProxy.goToPosture("StandInit", 0.5)
     motionProxy.setWalkArmsEnabled(True, True)
     motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
-    tts.say("Les lamas vaincront")
     tts.say("Je s'appelle Groot")
-    tts.say("I am Groot")
+    tts.say("Jeeee s'aaaaappeeeelle Groooooooooot")
 
 def veille():
     motionProxy.rest()
