@@ -67,7 +67,7 @@ def shoot(robotIP,robotPort):
 
 if __name__ == "__main__":
     robotIp = "localhost"
-    robotPort = robotPort1
+    robotPort = robotPort1#Il faut choisir le port du robot qui tire (rabotPortn avec n variant de 1 à 4 )
 
     if len(sys.argv) <= 1:
         print "Usage python motion_setFootStepDance.py robotIP (optional default: 127.0.0.1)"
