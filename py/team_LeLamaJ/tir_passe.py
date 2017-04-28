@@ -11,24 +11,29 @@ import motion
 import time
 from naoqi import ALProxy
 import math
+import select
+import actions
 
-#INITIALISATION
+def isData():
+    return select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], [])
 
-robotIp="localhost"
-robotPort=11212
-
-# Init proxies.
-try:
-    motionProxy = ALProxy("ALMotion", robotIp, robotPort)
-except Exception, e:
-    print ("Could not create proxy to ALMotion")
-    print ("Error was: ", e)
-
-try:
-    postureProxy = ALProxy("ALRobotPosture", robotIp, robotPort)
-except Exception, e:
-    print( "Could not create proxy to ALRobotPosture")
-    print ("Error was: ", e)
-
-motionProxy.wakeUp()
-motionProxy.setStiffnesses("Body", 1.0)
+def getKey():
+    c='s'
+    cok=False
+    if isData():
+        c = sys.stdin.read(1)
+        cok=True
+    return cok,c
+    
+def doShoot_right():
+    print(">>>>>>> action: tirer avec le pied droit")
+    actions.SR()
+    newKey,val = getKey(); # check if key pressed
+    event="Frappe_droite" # define the default event
+    if newKey:
+        if val=="w":
+            event="Wait" # new event if key "w" is pressed
+        if val=="s":
+            event="Stop" 
+    return event # return event to be able to define the transition
+# define here all the other functions (actions) of the fsm def doRun():
