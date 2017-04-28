@@ -86,10 +86,133 @@ def getKey():
             elif event.key == pygame.K_l:
                 print("START")
                 c='l'
+            elif event.key == pygame.K_r:
+                print("TirGauche")
+                c='r'
+            elif event.key == pygame.K_t:
+                print("TirDroit")
+                c='t'
     return cok,c
 
 # functions (actions of the fsm)
 
+def doTirD():
+    
+        #Send NAO to Pose Init
+        postureProxy.goToPosture("StandInit", 0.5)
+    
+        # Activate Whole Body Balancer
+        isEnabled  = True
+        motionProxy.wbEnable(isEnabled)
+    
+        # Legs are constrained fixed
+        stateName  = "Fixed"
+        supportLeg = "Legs"
+        motionProxy.wbFootState(stateName, supportLeg)
+    
+        # Constraint Balance Motion
+        isEnable   = True
+        supportLeg = "Legs"
+        motionProxy.wbEnableBalanceConstraint(isEnable, supportLeg)
+    
+        # Com go to LLeg
+        supportLeg = "LLeg"
+        duration   = 1.0
+        motionProxy.wbGoToBalance(supportLeg, duration)
+    
+        # RLeg is free
+        stateName  = "Free"
+        supportLeg = "RLeg"
+        motionProxy.wbFootState(stateName, supportLeg)
+    
+        # RLeg is optimized
+        effectorName = "RLeg"
+        axisMask     = 63
+        space        = motion.FRAME_ROBOT
+    
+    
+        # Motion of the RLeg
+        dx      = 0.065                # translation axis X (meters)
+        dz      = 0.07               # translation axis Z (meters)
+        dwy     =5*math.pi/180.0    # rotation axis Y (radian)
+    
+    
+        times   = [1.0, 1.35, 2.25]
+        isAbsolute = False
+    
+        targetList = [
+          [-dx, 0.0, dz, 0.0, +dwy, 0.0],
+          [+dx, 0.0, dz, 0.0, 0.0, 0.0],
+          [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+    
+        motionProxy.positionInterpolation(effectorName, space, targetList,
+                                     axisMask, times, isAbsolute)
+        time.sleep(0.05)
+        # Deactivate Head tracking
+        isEnabled    = False
+        motionProxy.wbEnable(isEnabled)
+    
+        # send robot to Pose Init
+        postureProxy.goToPosture("StandInit", 0.5)
+        event='go'
+        return event
+
+def doTirG():
+    
+        # Send NAO to Pose Init
+        postureProxy.goToPosture("StandInit", 0.5)
+    
+        # Activate Whole Body Balancer
+        isEnabled  = True
+        motionProxy.wbEnable(isEnabled)
+    
+        # Legs are constrained fixed
+        stateName  = "Fixed"
+        supportLeg = "Legs"
+        motionProxy.wbFootState(stateName, supportLeg)
+    
+        # Constraint Balance Motion
+        isEnable   = True
+        supportLeg = "Legs"
+        motionProxy.wbEnableBalanceConstraint(isEnable, supportLeg)
+     
+        supportLeg = "RLeg"
+        duration   = 1.0
+        motionProxy.wbGoToBalance(supportLeg, duration)
+    
+        # RLeg is free
+        stateName  = "Free"
+        supportLeg = "LLeg"
+        motionProxy.wbFootState(stateName, supportLeg)
+    
+        effectorName = "LLeg"
+        axisMask     = 63
+        space        = motion.FRAME_ROBOT
+    
+    
+        # Motion of the RLeg
+        dx      = 0.065              # translation axis X (meters)
+        dz      = 0.07             # translation axis Z (meters)
+        dwy     =5*math.pi/180.0    # rotation axis Y (radian)
+    
+    
+        times   = [1.0, 1.35, 2.25]
+        isAbsolute = False
+    
+        targetList = [
+          [-dx, 0.0, dz, 0.0, +dwy, 0.0],
+          [+dx, 0.0, dz, 0.0, 0.0, 0.0],
+          [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+    
+        motionProxy.positionInterpolation(effectorName, space, targetList,
+                                     axisMask, times, isAbsolute)    
+        time.sleep(0.05)
+        isEnabled    = False
+        motionProxy.wbEnable(isEnabled)
+        postureProxy.goToPosture("StandInit", 0.5)
+        event='go'
+        return event
+  
 def doAvance():
     print (">>>>>> action : run for 1 s")
     x = 0.5
@@ -118,6 +241,10 @@ def doAvance():
             event='go'
         elif val == 'm':
             event='Chill'
+        elif val == 'r':
+            event=  'tg'
+        elif val == 't' :
+            event ='td'
     sonarProxy.subscribe("SonarApp");
     time.sleep(0.25)
     valL = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
@@ -162,6 +289,10 @@ def doRecule():
             event='go'
         elif val == 'm':
             event='Chill'
+        elif val == 'r':
+            event ='tg'
+        elif val == 't' :
+            event ='td'
             
     sonarProxy.subscribe("SonarApp");
     time.sleep(0.25)
@@ -206,6 +337,11 @@ def doRight():
             event='go'
         elif val == 'm':
             event='Chill'
+
+        elif val == 'r':
+            event ='tg'
+        elif val == 't' :
+            event ='td'
     return event # return event to
 
     
@@ -236,6 +372,10 @@ def doLeft():
             event='go'
         elif val == 'm':
             event='Chill'
+        elif val == 'r':
+            event= 'tg'
+        elif val == 't' :
+            event= 'td'
     return event # return event to
 
 def doRightPC():
@@ -349,6 +489,10 @@ def doStart():
             event='go'
         elif val == 'm':
             event='Chill'
+        elif val == 'r':
+            event= 'tg'
+        elif val == 't' :
+            event ='td'
     return event # return event to
     
 # define here all the other functions (actions) of the fsm 
@@ -366,6 +510,8 @@ if __name__== "__main__":
     f.add_state("GauchePC")
     f.add_state("DroitePC")
     f.add_state("Stop")
+    f.add_state("TirDroit")
+    f.add_state("TirGauche")
 
     # example
     # add here all the states you need
@@ -381,6 +527,8 @@ if __name__== "__main__":
     f.add_event ("a")
     f.add_event ("e")
     f.add_event ("Chill")
+    f.add_event ("td")
+    f.add_event ("tg")
     
     # example
     # add here all the events you need
@@ -401,6 +549,8 @@ if __name__== "__main__":
     f.add_transition ("Start","GauchePC","a",doLeftPC);
     f.add_transition ("Start","Start","go",doStart);   
     f.add_transition ("Start","Stop","Chill",doChill);
+    f.add_transition ("Start","TirGauche","tg",doTirG);
+    f.add_transition ("Start","TirDroit","td",doTirD);
 
     #f.add_transition ("Avance","Stop","Chill",doChill);
     f.add_transition ("Avance","Avance","z",doAvance);
@@ -410,6 +560,8 @@ if __name__== "__main__":
     f.add_transition ("Avance","DroitePC","e",doRightPC);
     f.add_transition ("Avance","GauchePC","a",doLeftPC);
     f.add_transition ("Avance","Start","go",doStart);
+    f.add_transition ("Avance","TirGauche","tg",doTirG);
+    f.add_transition ("Avance","TirDroit","td",doTirD);
     
     #f.add_transition ("Recule","Stop","Chill",doChill);
     f.add_transition ("Recule","Recule","s",doRecule);
@@ -419,6 +571,8 @@ if __name__== "__main__":
     f.add_transition ("Recule","GauchePC","a",doLeftPC);
     f.add_transition ("Recule","Avance","z",doAvance);
     f.add_transition ("Recule","Start","go",doStart);
+    f.add_transition ("Recule","TirGauche","tg",doTirG);
+    f.add_transition ("Recule","TirDroit","td",doTirD);
 
     #f.add_transition ("Gauche","Stop","Chill",doChill);
     f.add_transition ("Gauche","Gauche","q",doLeft);
@@ -426,6 +580,8 @@ if __name__== "__main__":
     f.add_transition ("Gauche","Recule","s",doRecule);
     f.add_transition ("Gauche","Droite","d",doRight);
     f.add_transition ("Gauche","Start","go",doStart);
+    f.add_transition ("Gauche","TirGauche","tg",doTirG);
+    f.add_transition ("Gauche","TirDroit","td",doTirD);
     f.add_transition ("Gauche","DroitePC","e",doRightPC);
     f.add_transition ("Gauche","GauchePC","a",doLeftPC);
 
@@ -435,10 +591,13 @@ if __name__== "__main__":
     f.add_transition ("Droite","Recule","s",doRecule);
     f.add_transition ("Droite","Gauche","q",doLeft);
     f.add_transition ("Droite","Start","go",doStart);
+    f.add_transition ("Droite","TirGauche","tg",doTirG);
+    f.add_transition ("Droite","TirDroit","td",doTirD);
     f.add_transition ("Droite","DroitePC","e",doRightPC);
     f.add_transition ("Droite","GauchePC","a",doLeftPC);
 
-
+    f.add_transition ("TirDroit","Strat","go",doStart);
+    f.add_transition ("TirGauche","Start","go",doStart);
  # example
     # add here all the transitions you need
     # ...
