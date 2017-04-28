@@ -8,11 +8,11 @@ import math
 pygame.init()
 pygame.display.set_mode((100, 100))
 
-robotIp="localhost"
-robotPort=11212
+#robotIp="localhost"
+#robotPort=11212
 
-#robotIp="172.20.28.198"
-#robotPort=9559
+robotIp="172.20.12.134"
+robotPort=9559
 
 if (len(sys.argv) >= 2):
     robotIp = sys.argv[1]
@@ -71,10 +71,10 @@ def getKey():
             elif event.key == pygame.K_d:
                 print('Right')
                 c='d'
-            elif event.key == pygame.K_d:
+            elif event.key == pygame.K_a:
                 print('PC_Left')
                 c='a'
-            elif event.key == pygame.K_d:
+            elif event.key == pygame.K_e:
                 print('PC_Right')
                 c='e'
             elif event.key == pygame.K_p:
@@ -266,6 +266,7 @@ def doRightPC():
             event='go'
         elif val == 'm':
             event='Chill'
+    return event # return event to
 
 def doLeftPC():
     print (">>>>>> action : LeftPC for 1 s")
@@ -295,6 +296,7 @@ def doLeftPC():
             event='go'
         elif val == 'm':
             event='Chill'
+    return event # return event to
 
 def doChill():
     print (">>>>>> action :STOP for 1 s")
@@ -437,6 +439,24 @@ if __name__== "__main__":
     f.add_transition ("Droite","Start","go",doStart);
     f.add_transition ("Droite","DroitePC","e",doRightPC);
     f.add_transition ("Droite","GauchePC","a",doLeftPC);
+
+    #f.add_transition ("DroitePC","Stop","Chill",doChill);
+    f.add_transition ("DroitePC","Gauche","q",doLeft);
+    f.add_transition ("DroitePC","Avance","z",doAvance);
+    f.add_transition ("DroitePC","Recule","s",doRecule);
+    f.add_transition ("DroitePC","Droite","d",doRight);
+    f.add_transition ("DroitePC","Start","go",doStart);
+    f.add_transition ("DroitePC","DroitePC","e",doRightPC);
+    f.add_transition ("DroitePC","GauchePC","a",doLeftPC);
+
+    #f.add_transition ("GauchePC","Stop","Chill",doChill);
+    f.add_transition ("GauchePC","Droite","d",doRight);
+    f.add_transition ("GauchePC","Avance","z",doAvance);
+    f.add_transition ("GauchePC","Recule","s",doRecule);
+    f.add_transition ("GauchePC","Gauche","q",doLeft);
+    f.add_transition ("GauchePC","Start","go",doStart);
+    f.add_transition ("GauchePC","DroitePC","e",doRightPC);
+    f.add_transition ("GauchePC","GauchePC","a",doLeftPC);
 
 
  # example
