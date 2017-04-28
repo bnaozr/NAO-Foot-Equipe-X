@@ -4,9 +4,12 @@
 '''              The Cha Cha Basic Steps for Men       '''
 '''              Using setFootStep API                 '''
 ''' http://www.dancing4beginners.com/cha-cha-steps.htm '''
-import sys
+import sys , math
 from naoqi import ALProxy
-robotPort=11212
+robotPort1=11212
+robotPort2=11214
+robotPort3=11216
+robotPort4=11218
 
 
 def StiffnessOn(proxy):
@@ -17,7 +20,7 @@ def StiffnessOn(proxy):
     proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
 
 
-def main(robotIP):
+def shoot(robotIP,robotPort):
     # Init proxies.
     try:
         motionProxy = ALProxy("ALMotion", robotIP, robotPort)
@@ -30,67 +33,46 @@ def main(robotIP):
     except Exception, e:
         print "Could not create proxy to ALRobotPosture"
         print "Error was: ", e
-
+    try:
+        voicePxy = ALProxy("ALTextToSpeech", robotIp, robotPort)
+    except Exception, e:
+        print "Could not create proxy to text2speech"
+        print "Error was: ", e
     # Set NAO in stiffness On
     StiffnessOn(motionProxy)
-    postureProxy.goToPosture("StandInit", 0.0)
+    postureProxy.goToPosture("StandInit", 0.5)
 
-    ###############################
-    # First we defined each step
-    ###############################
-    footStepsList = []
 
-    # 1) Step forward with your left foot
-    footStepsList.append([["LLeg"], [[1.0, 0.0, 1.0]]])#Tir du pied gauche 
-    footStepsList.append([["RLeg"], [[1.0, 0.0, 1.0]]])#Tir du pied droit     
+    motionProxy.wakeUp()
+    
+    motionProxy.setStiffnesses("Body", 1.0)
+    
+    # Send NAO to Pose Init : it not standing then standing up
+    postureProxy.goToPosture("StandInit", 0.5)
+    
+    # Enable arms control by Walk algorithm
+    motionProxy.setWalkArmsEnabled(True, True)
+    
+    # allow to stop motion when losing ground contact, NAO stops walking
+    # when lifted  (True is default)
+    motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])   
+    nbStepDance = 2 # defined the number of cycle to make
 
-#    # 2) Sidestep to the left with your left foot
-#    footStepsList.append([["LLeg"], [[0.00, 0.16, 0.0]]])
-#
-#    # 3) Move your right foot to your left foot
-#    footStepsList.append([["RLeg"], [[0.00, -0.1, 0.0]]])
-#
-#    # 4) Sidestep to the left with your left foot
-#    footStepsList.append([["LLeg"], [[0.00, 0.16, 0.0]]])
-#
-#    # 5) Step backward & left with your right foot
-#    footStepsList.append([["RLeg"], [[-0.04, -0.1, 0.0]]])
-#
-#    # 6)Step forward & right with your right foot
-#    footStepsList.append([["RLeg"], [[0.00, -0.16, 0.0]]])
-#
-#    # 7) Move your left foot to your right foot
-#    footStepsList.append([["LLeg"], [[0.00, 0.1, 0.0]]])
-#
-#    # 8) Sidestep to the right with your right foot
-#    footStepsList.append([["RLeg"], [[0.00, -0.16, 0.0]]])
+    x = 0.75
+    y = 0.0
+    theta = 0
+    motionProxy.moveTo (x, y, theta)
+    print "Side 1"
 
-    ###############################
-    # Send Foot step
-    ###############################
-    stepFrequency = 1.0
-    clearExisting = False
-    nbStepDance = 1 # defined the number of cycle to make
-
-    for j in range( nbStepDance ):
-        for i in range( len(footStepsList) ):
-            motionProxy.setFootStepsWithSpeed(
-                footStepsList[i][0],
-                footStepsList[i][1],
-                [stepFrequency],
-                clearExisting)
-#    motionProxy.setFootStepsWithSpeed(
-#                ["LLeg"], [1.0, 0.0, 1.0]
-#                [stepFrequency],
-#                clearExisting)
 
 if __name__ == "__main__":
     robotIp = "localhost"
+    robotPort = robotPort1#Il faut choisir le port du robot qui tire (rabotPortn avec n variant de 1 à 4 )
 
     if len(sys.argv) <= 1:
         print "Usage python motion_setFootStepDance.py robotIP (optional default: 127.0.0.1)"
     else:
         robotIp = sys.argv[1]
 
-    main(robotIp)
+    shoot(robotIp,robotPort)
 
