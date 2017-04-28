@@ -1,12 +1,20 @@
 import fsm
 import time
+import evitement
 import sys
 import pygame
 import nao_cmd as nc
+import test_droit as td
+import test_gauche as tg
+from naoqi import ALProxy
 pygame.init()
 
 # draw a little area (to focus on to get keys)
 pygame.display.set_mode((100, 100))
+
+robotIp="172.20.28.198"
+robotPort=9559
+tts = ALProxy("ALTextToSpeech", robotIp, robotPort)
 
 # use keyboard to control the fsm
 
@@ -21,8 +29,8 @@ pygame.display.set_mode((100, 100))
 #  d : event "Turn_right"
 #  a : event "SideStep_Left"
 #  e : event "SideStep_Right"
-#  1 : event "Shoot_Left" (pavé numérique : 1)
-#  2 : event "Shoot_Right" (pavé numérique : 2)
+#  1 : event "Shoot_Left" (pave numerique : 1)
+#  2 : event "Shoot_Right" (pave numerique : 2)
 
 # global variables
 f = fsm.fsm();  # finite state machine
@@ -48,9 +56,9 @@ def getKey():
                 cok, c = True, "e"
             elif event.key == pygame.K_c:
                 cok, c = True, "c"
-            elif event.key == pygame.K_return:
+            elif event.key == pygame.K_RETURN:
                 cok, c = True, "enter"
-            elif event.key == pygame.K_escape:
+            elif event.key == pygame.K_ESCAPE:
                 cok, c = True, "echap"
             elif event.key == pygame.K_KP1:
                 cok, c = True, "1"
@@ -62,7 +70,6 @@ def getKey():
 def doRun():
     print(">>>>>> action : run")
     nc.marche_droite()
-    time.sleep(2.0)
     newKey,val = getKey();
     event="Wait"
     if newKey:
@@ -79,7 +86,7 @@ def doRun():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -87,8 +94,9 @@ def doRun():
     return event 
 
 def doWait():
-    print(">>>>>> action : wait for 1 s")
-    time.sleep(1.0)
+    print(">>>>>> action : wait")
+    evitement.eviter()
+    time.sleep(0.5)
     newKey,val = getKey(); 
     event="Wait"
     if newKey:
@@ -105,7 +113,7 @@ def doWait():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -130,7 +138,6 @@ def doStop():
 def doTurn_Right():
     print(">>>>>> action : turn right")
     nc.rotation_droite()
-    time.sleep(2.0)
     newKey,val = getKey(); # check if key pressed
     event="Wait" # define the default event
     if newKey:
@@ -145,19 +152,18 @@ def doTurn_Right():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
             event="Shoot_Right"
-    return event # return event to be able to define the transition
+    return event 
 
 def doTurn_Left():
     print(">>>>>> action : turn left")
     nc.rotation_gauche()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    newKey,val = getKey(); 
+    event="Wait" 
     if newKey:
         if val=="z":
             event="Go"
@@ -170,7 +176,7 @@ def doTurn_Left():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -180,9 +186,8 @@ def doTurn_Left():
 def doSideStep_Right():
     print(">>>>>> action : side step right")
     nc.pas_cote_droit()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    newKey,val = getKey(); 
+    event="Wait" 
     if newKey:
         if val=="z":
             event="Go"
@@ -195,7 +200,7 @@ def doSideStep_Right():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -205,9 +210,8 @@ def doSideStep_Right():
 def doSideStep_Left():
     print(">>>>>> action : side step left")
     nc.pas_cote_gauche()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    newKey,val = getKey(); 
+    event="Wait" 
     if newKey:
         if val=="z":
             event="Go"
@@ -220,7 +224,7 @@ def doSideStep_Left():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
@@ -230,9 +234,8 @@ def doSideStep_Left():
 def doGo_Back():
     print(">>>>>> action : go back")
     nc.marche_arriere()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    newKey,val = getKey();
+    event="Wait"
     if newKey:
         if val=="z":
             event="Go"
@@ -245,19 +248,62 @@ def doGo_Back():
         elif val=="a":
             event="SideStep_Left"
         elif val=="e":
-            event="Side_Step_Right"
+            event="SideStep_Right"
         elif val=="1":
             event="Shoot_Left"
         elif val=="2":
             event="Shoot_Right"
     return event
 
-## Fonctions à venir :
-    
 def doShoot_Right():
-    pass
+    tts.say("Les ENSIETA baisent comme des dieux")
+    print(">>>>>> action : shoot right")
+    td.main(robotIp)
+    newKey,val = getKey(); 
+    event="Wait" 
+    if newKey:
+        if val=="z":
+            event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="SideStep_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event
+
 def doShoot_Left():
-    pass
+    tts.say("Pizza Trad Pizza Trad")
+    print(">>>>>> action : shoot left")
+    tg.main(robotIp)
+    newKey,val = getKey(); 
+    event="Wait" 
+    if newKey:
+        if val=="z":
+            event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="SideStep_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event
 
     
 if __name__== "__main__":
