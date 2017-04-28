@@ -54,6 +54,14 @@ def rotation_gauche():
     y = 0.0
     theta = math.pi/2.0
     motionProxy.moveTo (x, y, theta)
+
+def marche_arriere():
+    motionProxy.wakeUp()
+    postureProxy.goToPosture("StandInit", 0.5)
+    x = -0.5
+    y = 0.0
+    theta = 0.0
+    motionProxy.moveTo (x, y, theta)
     
 def pas_cote_droit():
     pass
