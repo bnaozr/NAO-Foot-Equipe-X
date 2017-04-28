@@ -17,6 +17,7 @@ pygame.display.set_mode((100, 100))
 
 #  z : event "Go" 
 #  q : event "Turn_left"
+#  s : event "Go_Back"
 #  d : event "Turn_right"
 #  a : event "SideStep_Left"
 #  e : event "SideStep_Right"
@@ -58,54 +59,69 @@ def getKey():
     return cok,c
 
 # functions (actions of the fsm)
-# example of a function doRun 
 def doRun():
     print(">>>>>> action : run")
     nc.marche_droite()
     time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    newKey,val = getKey();
+    event="Wait"
     if newKey:
         if val=="z":
-            event="Go"  # new event if key "s" is pressed
+            event="Go"
         elif val=="echap":
             event="Stop"
         elif val=="d":
             event="Turn_Right"
         elif val=="q":
             event="Turn_Left"
-    return event # return event to be able to define the transition
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="Side_Step_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event 
 
 def doWait():
     print(">>>>>> action : wait for 1 s")
     time.sleep(1.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    newKey,val = getKey(); 
+    event="Wait"
     if newKey:
         if val=="z":
-            event="Go"  # new event if key "z" is pressed
+            event="Go" 
         elif val=="echap":
             event="Stop"
         elif val=="d":
             event="Turn_Right"
         elif val=="q":
             event="Turn_Left"
-    return event # return event to be able to define the transition
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="Side_Step_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event 
 
 def doStart():
     print("Bonjour !")
     nc.initialisation()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    time.sleep(1.0)
+    newKey,val = getKey(); 
+    event="Wait"
     if newKey:
-        if val=="z":
-            event="Go"  # new event if key "g" is pressed
-        elif val=="d":
-            event="Turn_Right"
-        elif val=="q":
-            event="Turn_Left"
-    return event # return event to be able to define the transition
+        if val=="echap":
+            event="Stop"  
+    return event 
 
 def doStop():
     print("Au revoir !")
@@ -120,6 +136,20 @@ def doTurn_Right():
     if newKey:
         if val=="z":
             event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="Side_Step_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
     return event # return event to be able to define the transition
 
 def doTurn_Left():
@@ -131,8 +161,105 @@ def doTurn_Left():
     if newKey:
         if val=="z":
             event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="Side_Step_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
     return event 
 
+def doSideStep_Right():
+    print(">>>>>> action : side step right")
+    nc.pas_cote_droit()
+    time.sleep(2.0)
+    newKey,val = getKey(); # check if key pressed
+    event="Wait" # define the default event
+    if newKey:
+        if val=="z":
+            event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="Side_Step_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event
+
+def doSideStep_Left():
+    print(">>>>>> action : side step left")
+    nc.pas_cote_gauche()
+    time.sleep(2.0)
+    newKey,val = getKey(); # check if key pressed
+    event="Wait" # define the default event
+    if newKey:
+        if val=="z":
+            event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="Side_Step_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event
+
+def doGo_Back():
+    print(">>>>>> action : go back")
+    nc.marche_arriere()
+    time.sleep(2.0)
+    newKey,val = getKey(); # check if key pressed
+    event="Wait" # define the default event
+    if newKey:
+        if val=="z":
+            event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="Side_Step_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event
+
+## Fonctions à venir :
+    
+def doShoot_Right():
+    pass
+def doShoot_Left():
+    pass
+
+    
 if __name__== "__main__":
     
     # define the states
@@ -148,23 +275,45 @@ if __name__== "__main__":
     f.add_event ("Start")
     f.add_event ("Turn_Right")
     f.add_event ("Turn_Left")
+    f.add_event ("Go_Back")
+    f.add_event ("SideStep_Right")
+    f.add_event ("SideStep_Left")
+    f.add_event ("Shoot_Left")
+    f.add_event ("Shoot_Right")
     
    
     # defines the transition matrix
     # current state, next state, event, action in next state
     f.add_transition ("Idle", "Ready", "Start", doStart);
     f.add_transition ("Ready", "Ready", "Wait", doWait);
-    f.add_transition ("Ready", "Run", "Go", doRun);
     f.add_transition ("Ready", "Idle", "Stop", doStop);
     f.add_transition ("Ready", "Rotation", "Turn_Right", doTurn_Right)
     f.add_transition ("Ready", "Rotation", "Turn_Left", doTurn_Left)
+    f.add_transition ("Ready", "Run", "SideStep_Left", doSideStep_Left)
+    f.add_transition ("Ready", "Run", "SideStep_Right", doSideStep_Right)
+    f.add_transition ("Ready", "Run", "Shoot_Left", doShoot_Left)
+    f.add_transition ("Ready", "Run", "Shoot_Right", doShoot_Right)
+    f.add_transition ("Ready", "Run", "Go_Back", doGo_Back)
+    f.add_transition ("Ready", "Run", "Go", doRun);
     f.add_transition ("Run", "Idle", "Stop", doStop);
     f.add_transition ("Run", "Ready", "Wait", doWait);
     f.add_transition ("Run", "Run", "Go", doRun);
     f.add_transition ("Run", "Rotation", "Turn_Right", doTurn_Right)
     f.add_transition ("Run", "Rotation", "Turn_Left", doTurn_Left)
+    f.add_transition ("Run", "Run", "SideStep_Left", doSideStep_Left)
+    f.add_transition ("Run", "Run", "SideStep_Right", doSideStep_Right)
+    f.add_transition ("Run", "Run", "Shoot_Left", doShoot_Left)
+    f.add_transition ("Run", "Run", "Shoot_Right", doShoot_Right)
+    f.add_transition ("Run", "Run", "Go_Back", doGo_Back)
     f.add_transition ("Rotation", "Ready", "Wait", doWait)
     f.add_transition ("Rotation", "Run", "Go", doRun)
+    f.add_transition ("Rotation", "Rotation", "Turn_Right", doTurn_Right)
+    f.add_transition ("Rotation", "Rotation", "Turn_Left", doTurn_Left)
+    f.add_transition ("Rotation", "Run", "SideStep_Left", doSideStep_Left)
+    f.add_transition ("Rotation", "Run", "SideStep_Right", doSideStep_Right)
+    f.add_transition ("Rotation", "Run", "Shoot_Left", doShoot_Left)
+    f.add_transition ("Rotation", "Run", "Shoot_Right", doShoot_Right)
+    f.add_transition ("Rotation", "Run", "Go_Back", doGo_Back)
     
     # initial state
     f.set_state ("Idle")
