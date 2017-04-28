@@ -36,3 +36,10 @@ git push
 
 
 
+=======
+coucou les loulous ! 
+
+stratégie de la team : cuillères, tatane et fourchette pas de pitié !!!!!!
+
+Nouvelle Pull Request v2.0 
+>>>>>>> eb36c2f4134e47e686cdcf664de64e3e3e7525a8
