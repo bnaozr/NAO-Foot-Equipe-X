@@ -57,11 +57,17 @@ for i in range(4):
     if (sonarL<0.19  or sonarR<0.19) and (sonarL>0.1 or sonarR>0.1) :
         motionProxy.setWalkArmsEnabled(True, True)
         motionProxy.moveTo(-0.2,0,0)
+        sonarL = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
+        sonarR = memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value")
     elif sonarL<=0.1 or sonarR<=0.1:
         if sonarL<0.1 :
             motionProxy.moveTo(-0.2,0,-(math.pi)/4)
+            sonarL = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
+            sonarR = memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value")
         elif sonarR<0.1: 
             motionProxy.moveTo(-0.2,0,math.pi/4)
+            sonarL = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
+            sonarR = memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value")
     
     
 
