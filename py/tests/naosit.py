@@ -8,6 +8,10 @@ import math
 robotIp="localhost"
 robotPort=11212
 
+if len(sys.argv) == 3:
+    robotIp=sys.argv[1]
+    robotPort=int(sys.argv[2])
+
 # Init proxies.
 try:
     motionProxy = ALProxy("ALMotion", robotIp, robotPort)

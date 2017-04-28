@@ -18,12 +18,12 @@ IP est 127.0.0.1 (ou localhost) et le port est
 11212
 """
 
-import math
+
 import sys
 import motion
 import time
+import math
 from naoqi import ALProxy
-
 
 def StiffnessOn(proxy):
     # We use the "Body" name to signify the collection of all joints
@@ -98,7 +98,47 @@ def tournerdroite(motionProxy):
     Frequency =1.0 
     motionProxy.setWalkTargetVelocity(X, Y, Theta, Frequency)
 
-
+def PCG(motionProxy):
+    X = 0.0 
+    Y = 1.0
+    Theta = 0
+    Frequency =0.5 
+    motionProxy.setWalkTargetVelocity(X, Y, Theta, Frequency)
+    
+def PCD(motionProxy):
+    X = 0.0 
+    Y = -1.0
+    Theta = 0
+    Frequency =0.5 
+    motionProxy.setWalkTargetVelocity(X, Y, Theta, Frequency)
+    
+def CDF(motionProxy):
+    X = 1.0 
+    Y = 0.0
+    Theta = -0.5
+    Frequency =0.5 
+    motionProxy.setWalkTargetVelocity(X, Y, Theta, Frequency)
+    
+def CGF(motionProxy):
+    X = 1.0 
+    Y = 0.0
+    Theta = 0.5
+    Frequency =0.5 
+    motionProxy.setWalkTargetVelocity(X, Y, Theta, Frequency)
+    
+def CGB(motionProxy):
+    X = -1.0 
+    Y = 0.0
+    Theta = -0.5
+    Frequency =0.5 
+    motionProxy.setWalkTargetVelocity(X, Y, Theta, Frequency)
+    
+def CDB(motionProxy):
+    X = -1.0 
+    Y = 0.0
+    Theta = 0.5
+    Frequency =0.5 
+    motionProxy.setWalkTargetVelocity(X, Y, Theta, Frequency)
 
 def arret_dpt(motionProxy):      
     X = 0.0
@@ -117,6 +157,7 @@ def inactif(postureProxy, motionProxy):
     
     
 def kick_gauche(postureProxy, motionProxy):
+    motionProxy.setWalkTargetVelocity(0, 0, 0, 0)
     ''' Example of a whole body kick
     Warning: Needs a PoseInit before executing
              Whole body balancer must be inactivated at the end of the script
@@ -180,7 +221,7 @@ def kick_gauche(postureProxy, motionProxy):
 
     # Com go to LLeg
     supportLeg = "RLeg"
-    duration   = 2.0
+    duration   = 2
     motionProxy.wbGoToBalance(supportLeg, duration)
 
     # RLeg is free
@@ -202,6 +243,7 @@ def kick_gauche(postureProxy, motionProxy):
 
     
 def kick_droit(postureProxy, motionProxy):
+    motionProxy.setWalkTargetVelocity(0, 0, 0, 0)
     ''' Example of a whole body kick
     Warning: Needs a PoseInit before executing
              Whole body balancer must be inactivated at the end of the script

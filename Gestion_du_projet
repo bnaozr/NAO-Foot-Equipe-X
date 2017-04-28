@@ -1,0 +1,28 @@
+Pour gérer le projet, les tâches sont réparties de la manière suivante:
+  Intégration (gestion du projet, validation des tâches, envoi à l'administrateur): noeleel
+    GitHub
+    
+  Déplacement du robot par téléopération: wozniaan, noeleel
+  
+    Nom du(des) fichier(s) Python: 
+      woz_fsm.py
+      woz_teleoperation.py
+      woz_nao_cmd.py.
+    Description:
+    
+  Evitement automatique des autres robots (détection par ultrasons, etc...): wozniaan, arslanan, lefevrlu
+  
+    Nom du(des) fichier(s) Python: 
+      woz_evitement.py.
+    Description:
+    
+  Fonction de tir(shoot): logarima, LouisValery, brugieju 
+  
+    Nom du(des) fichier(s) Python:
+    Description:
+    
+  Interface graphique de commande: noeleel, logarima
+  
+    Nom du(des) fichier(s) Python:
+    Description:
+   
