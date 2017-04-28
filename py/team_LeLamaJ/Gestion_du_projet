@@ -5,15 +5,15 @@ Pour gérer le projet, les tâches sont réparties de la manière suivante:
   Déplacement du robot par téléopération: wozniaan, noeleel
   
     Nom du(des) fichier(s) Python: 
-      woz_fsm.py
-      woz_teleoperation.py
-      woz_nao_cmd.py.
+      fsm.py
+      teleoperation.py
+      nao_cmd.py
     Description:
     
-  Evitement automatique des autres robots (détection par ultrasons, etc...): wozniaan, arslanan, lefevrlu
+  Evitement automatique des autres robots (détection par ultrasons, etc...): arslanan, lefevrlu
   
     Nom du(des) fichier(s) Python: 
-      woz_evitement.py.
+      woz_evitement.py
     Description:
     
   Fonction de tir(shoot): logarima, LouisValery, brugieju 

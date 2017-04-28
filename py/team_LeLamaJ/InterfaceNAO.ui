@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IHM</class>
+ <widget class="QMainWindow" name="IHM">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>915</width>
+    <height>716</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>NAO Football Game LELAMAJ</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>10</y>
+      <width>401</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fenêtre de visualisation du robot NAO de l'équipe LELAMAJ</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="Conteneur" native="true">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>881</width>
+      <height>451</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>500</y>
+      <width>179</width>
+      <height>134</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Droite</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_rightturn">
+       <property name="text">
+        <string>Tourner(Droite)</string>
+       </property>
+       <property name="shortcut">
+        <string>Right</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_rightshoot">
+       <property name="text">
+        <string>Tirer(Ctrl+Droite)</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+Right</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_rightshift">
+       <property name="text">
+        <string>Pas latéral(Maj+Droite)</string>
+       </property>
+       <property name="shortcut">
+        <string>Shift+Right</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>500</y>
+      <width>113</width>
+      <height>134</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Bouger</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_forward">
+       <property name="text">
+        <string>Avancer(Haut)</string>
+       </property>
+       <property name="shortcut">
+        <string>Up</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_back">
+       <property name="text">
+        <string>Reculer(Bas)</string>
+       </property>
+       <property name="shortcut">
+        <string>Down</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_crouch">
+       <property name="text">
+        <string>Arrêter(P)</string>
+       </property>
+       <property name="shortcut">
+        <string>P</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>500</y>
+      <width>123</width>
+      <height>134</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Simulation</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_start">
+       <property name="text">
+        <string>Commencer(C)</string>
+       </property>
+       <property name="shortcut">
+        <string>C</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_stop">
+       <property name="text">
+        <string>Stopper(S)</string>
+       </property>
+       <property name="shortcut">
+        <string>S</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_quitter">
+       <property name="text">
+        <string>Quitter(Ctrl+Q)</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+Q</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>500</y>
+      <width>187</width>
+      <height>134</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Gauche</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_leftturn">
+       <property name="text">
+        <string>Tourner(Gauche)</string>
+       </property>
+       <property name="shortcut">
+        <string>Left</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_leftshoot">
+       <property name="text">
+        <string>Tirer(Ctrl+Gauche)</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+Left</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bouton_leftshift">
+       <property name="text">
+        <string>Pas latéral(Maj+Gauche)</string>
+       </property>
+       <property name="shortcut">
+        <string>Shift+Left</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>915</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="actionCommencer_Ctrl_C"/>
+    <addaction name="separator"/>
+    <addaction name="actionDocumentation_Ctrl_D"/>
+    <addaction name="actionAide_Ctrl_A"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuitter_Ctrl_Q"/>
+   </widget>
+   <addaction name="menuMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionCommencer_Ctrl_C">
+   <property name="text">
+    <string>Commencer (Ctrl+C)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionAide_Ctrl_A">
+   <property name="text">
+    <string>Aide (Ctrl+A)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionDocumentation_Ctrl_D">
+   <property name="text">
+    <string>Documentation (Ctrl+D)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionQuitter_Ctrl_Q">
+   <property name="text">
+    <string>Quitter (Ctrl+Q)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>Bouton_quitter</sender>
+   <signal>clicked()</signal>
+   <receiver>IHM</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>657</x>
+     <y>641</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>839</x>
+     <y>657</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionQuitter_Ctrl_Q</sender>
+   <signal>triggered()</signal>
+   <receiver>IHM</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
