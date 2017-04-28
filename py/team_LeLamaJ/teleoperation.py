@@ -4,10 +4,15 @@ import evitement
 import sys
 import pygame
 import nao_cmd as nc
+import test_droit as td
+import test_gauche as tg
 pygame.init()
 
 # draw a little area (to focus on to get keys)
 pygame.display.set_mode((100, 100))
+
+robotIp="172.20.28.198"
+robotPort=9559
 
 # use keyboard to control the fsm
 
@@ -63,7 +68,6 @@ def getKey():
 def doRun():
     print(">>>>>> action : run")
     nc.marche_droite()
-    time.sleep(0.5)
     newKey,val = getKey();
     event="Wait"
     if newKey:
@@ -90,7 +94,7 @@ def doRun():
 def doWait():
     print(">>>>>> action : wait")
     evitement.eviter()
-    time.sleep(0.1)
+    time.sleep(0.5)
     newKey,val = getKey(); 
     event="Wait"
     if newKey:
@@ -132,7 +136,6 @@ def doStop():
 def doTurn_Right():
     print(">>>>>> action : turn right")
     nc.rotation_droite()
-    time.sleep(0.5)
     newKey,val = getKey(); # check if key pressed
     event="Wait" # define the default event
     if newKey:
@@ -157,7 +160,6 @@ def doTurn_Right():
 def doTurn_Left():
     print(">>>>>> action : turn left")
     nc.rotation_gauche()
-    time.sleep(0.5)
     newKey,val = getKey(); 
     event="Wait" 
     if newKey:
@@ -182,7 +184,6 @@ def doTurn_Left():
 def doSideStep_Right():
     print(">>>>>> action : side step right")
     nc.pas_cote_droit()
-    time.sleep(0.5)
     newKey,val = getKey(); 
     event="Wait" 
     if newKey:
@@ -207,7 +208,6 @@ def doSideStep_Right():
 def doSideStep_Left():
     print(">>>>>> action : side step left")
     nc.pas_cote_gauche()
-    time.sleep(0.5)
     newKey,val = getKey(); 
     event="Wait" 
     if newKey:
@@ -232,7 +232,6 @@ def doSideStep_Left():
 def doGo_Back():
     print(">>>>>> action : go back")
     nc.marche_arriere()
-    time.sleep(0.5)
     newKey,val = getKey();
     event="Wait"
     if newKey:
@@ -254,12 +253,53 @@ def doGo_Back():
             event="Shoot_Right"
     return event
 
-## Fonctions a venir :
-    
 def doShoot_Right():
-    pass
+    print(">>>>>> action : shoot right")
+    td.main(robotIp)
+    newKey,val = getKey(); 
+    event="Wait" 
+    if newKey:
+        if val=="z":
+            event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="SideStep_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event
+
 def doShoot_Left():
-    pass
+    print(">>>>>> action : shoot left")
+    tg.main(robotIp)
+    newKey,val = getKey(); 
+    event="Wait" 
+    if newKey:
+        if val=="z":
+            event="Go"
+        elif val=="d":
+            event="Turn_Right"
+        elif val=="q":
+            event="Turn_Left"
+        elif val=="s":
+            event="Go_Back"
+        elif val=="a":
+            event="SideStep_Left"
+        elif val=="e":
+            event="SideStep_Right"
+        elif val=="1":
+            event="Shoot_Left"
+        elif val=="2":
+            event="Shoot_Right"
+    return event
 
     
 if __name__== "__main__":
