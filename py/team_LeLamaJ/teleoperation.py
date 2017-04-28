@@ -1,5 +1,6 @@
 import fsm
 import time
+import evitement
 import sys
 import pygame
 import nao_cmd as nc
@@ -88,6 +89,7 @@ def doRun():
 
 def doWait():
     print(">>>>>> action : wait")
+    evitement.eviter()
     time.sleep(0.1)
     newKey,val = getKey(); 
     event="Wait"
