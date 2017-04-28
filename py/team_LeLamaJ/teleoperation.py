@@ -48,9 +48,9 @@ def getKey():
                 cok, c = True, "e"
             elif event.key == pygame.K_c:
                 cok, c = True, "c"
-            elif event.key == pygame.K_return:
+            elif event.key == pygame.K_RETURN:
                 cok, c = True, "enter"
-            elif event.key == pygame.K_escape:
+            elif event.key == pygame.K_ESCAPE:
                 cok, c = True, "echap"
             elif event.key == pygame.K_KP1:
                 cok, c = True, "1"
@@ -62,7 +62,7 @@ def getKey():
 def doRun():
     print(">>>>>> action : run")
     nc.marche_droite()
-    time.sleep(2.0)
+    time.sleep(0.5)
     newKey,val = getKey();
     event="Wait"
     if newKey:
@@ -87,8 +87,8 @@ def doRun():
     return event 
 
 def doWait():
-    print(">>>>>> action : wait for 1 s")
-    time.sleep(1.0)
+    print(">>>>>> action : wait")
+    time.sleep(0.1)
     newKey,val = getKey(); 
     event="Wait"
     if newKey:
@@ -130,7 +130,7 @@ def doStop():
 def doTurn_Right():
     print(">>>>>> action : turn right")
     nc.rotation_droite()
-    time.sleep(2.0)
+    time.sleep(0.5)
     newKey,val = getKey(); # check if key pressed
     event="Wait" # define the default event
     if newKey:
@@ -150,14 +150,14 @@ def doTurn_Right():
             event="Shoot_Left"
         elif val=="2":
             event="Shoot_Right"
-    return event # return event to be able to define the transition
+    return event 
 
 def doTurn_Left():
     print(">>>>>> action : turn left")
     nc.rotation_gauche()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    time.sleep(0.5)
+    newKey,val = getKey(); 
+    event="Wait" 
     if newKey:
         if val=="z":
             event="Go"
@@ -180,9 +180,9 @@ def doTurn_Left():
 def doSideStep_Right():
     print(">>>>>> action : side step right")
     nc.pas_cote_droit()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    time.sleep(0.5)
+    newKey,val = getKey(); 
+    event="Wait" 
     if newKey:
         if val=="z":
             event="Go"
@@ -205,9 +205,9 @@ def doSideStep_Right():
 def doSideStep_Left():
     print(">>>>>> action : side step left")
     nc.pas_cote_gauche()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    time.sleep(0.5)
+    newKey,val = getKey(); 
+    event="Wait" 
     if newKey:
         if val=="z":
             event="Go"
@@ -230,9 +230,9 @@ def doSideStep_Left():
 def doGo_Back():
     print(">>>>>> action : go back")
     nc.marche_arriere()
-    time.sleep(2.0)
-    newKey,val = getKey(); # check if key pressed
-    event="Wait" # define the default event
+    time.sleep(0.5)
+    newKey,val = getKey();
+    event="Wait"
     if newKey:
         if val=="z":
             event="Go"
