@@ -55,8 +55,8 @@ def rotation_gauche():
     theta = math.pi/2.0
     motionProxy.moveTo (x, y, theta)
     
-def Pas_droit():
+def pas_cote_droit():
     pass
 
-def Pas_gauche():
+def pas_cote_gauche():
     pass
