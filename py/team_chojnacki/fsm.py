@@ -31,5 +31,5 @@ class fsm:
         self.curState = self.transitions [key][0]
         st = "Transition - Old State : "+state+"; Event : "+event+"; New state : "+self.curState
         st = st+"; Action : "+self.transitions [key][1].__name__+"()"
-        print (st)
+        print st
         return self.transitions [key][1]
