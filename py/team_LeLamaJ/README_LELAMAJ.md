@@ -9,4 +9,6 @@ Lucie LEFEVRE (lefevrlu)
 Mathieu LOGARIO (logarima)
 Louis VALERY (LouisValery)
 Anne-Laure WOZNIAK (Wozniaan)
+Alassaf Jasser (Pseudo?)
+Aldoughaish Thamer (Pseudo?)
 
