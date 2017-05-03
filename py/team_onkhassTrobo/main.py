@@ -1,9 +1,9 @@
+import sys
+sys.path.append("../../pynaoqi-python-2.7-naoqi-1.14-linux64")
 import fsm
 import select
 from time import sleep
-import sys
 from naoqi import ALProxy
-#from key import isData , getKey
 import pygame
 import sys
 import numpy as np
