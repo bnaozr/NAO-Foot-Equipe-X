@@ -14,10 +14,10 @@ import math
 ##
 ## Init proxies.
 
-robotIp = "172.20.12.134"
-robotPort= 9559
-#robotIp="localhost"
-#robotPort=11212
+#robotIp = "172.20.12.134"
+#robotPort= 9559
+robotIp="localhost"
+robotPort=11212
 
 try:
     motionProxy = ALProxy("ALMotion", robotIp, robotPort)
@@ -86,6 +86,11 @@ class nao():
     
     def avancer(self):  
         self.motionProxy.setWalkTargetVelocity(1, 0, 0, 0.01)
+        
+    def pc_droite(self):  
+        self.motionProxy.setWalkTargetVelocity(0, -1, 0, 0.01)
+    def pc_gauche(self):  
+        self.motionProxy.setWalkTargetVelocity(0, 1, 0, 0.01)
 #        Left = self.memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
 #        Right = self.memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value") 
 #        if Left > Right and Right < 0.5 :
