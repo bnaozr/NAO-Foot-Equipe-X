@@ -58,6 +58,8 @@ def getKey():
                 return True, 't'
             elif event.key == pygame.K_r:
                 return True, 'r'
+            elif event.key == pygame.K_g:
+                return True, 'g'
             
             else :
                 return False, 'faux'
@@ -131,6 +133,8 @@ def Pause():
             event = "Fin"
         if val == "t":
             event = "TirD"
+        if val == "g":
+            event = "Dabe"
         if val == "r":
             event = "TirG"
     return event
@@ -154,6 +158,8 @@ def DoDemarrer():
             event = "TirD"
         if val == "r":
             event = "TirG"
+        if val == "g":
+            event = "Dabe"
             
     return event
 
@@ -200,7 +206,15 @@ def DoTirG():
     nao.tirerpiedgauche()
     event = "Pause"
     return event
-        
+    
+def DoDab():
+    print("J'effectue le dab")
+    newKey,val = getKey()
+    event = "Dabe"
+    nao.dab()
+    event = "Pause"
+    return event 
+    
 if __name__== "__main__":
     
     # define the states
@@ -212,6 +226,7 @@ if __name__== "__main__":
     f.add_state("TirerDroit")
     f.add_state("TirerGauche")
     f.add_state ("End")
+    f.add_state("Dab")
     # add here all the states you need
     # ...
 
@@ -225,6 +240,7 @@ if __name__== "__main__":
     f.add_event ("Pause")
     f.add_event ("TirD")
     f.add_event ("TirG")
+    f.add_event ("Dabe")
     
     # add here all the events you need
     # ...
@@ -249,6 +265,12 @@ if __name__== "__main__":
     f.add_transition ("Tourner a gauche", "Tourner a gauche", "Turn left", DoTurnLeft)
     f.add_transition ("Tourner a droite","Tourner a droite", "Turn right", DoTurnRight)
     f.add_transition ("Mission", "Mission", "Demarrer", DoDemarrer)
+    
+    f.add_transition ("Mission", "Dab", "Dabe", DoDab)
+    f.add_transition ("Idle", "Dab", "Dabe", DoDab)
+    f.add_transition ("Avancer", "Dab","Dabe", DoDab)
+    
+    f.add_transition ("Dab","Mission","Pause", Pause)
     # add here all the transitions you need
     # ...
 

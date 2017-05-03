@@ -3,9 +3,10 @@
 import sys
 from naoqi import ALProxy
 import time
+robotIP="localhost"
 
 def main(robotIP):
-    PORT = 9559
+    PORT = 11212
 
     try:
         motionProxy = ALProxy("ALMotion", robotIP, PORT)
