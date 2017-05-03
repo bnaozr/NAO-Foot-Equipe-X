@@ -60,6 +60,9 @@ def getKey():
                 return True, 'r'
             elif event.key == pygame.K_g:
                 return True, 'g'
+            elif event.key == pygame.K_x:
+                return True, 'x'
+            
             
             else :
                 return False, 'faux'
@@ -116,9 +119,20 @@ def DoMarcher():
             event = "Pause"
     return event
     
+def DoReculer():
+    print ('Le robot recule')
+    time.sleep(t)
+    newKey,val = getKey()
+    event ="Backward"
+    nao.reculer()
+    if newKey : 
+        if val =="s":
+            event = "Pause"
+    return event    
+
 def Pause():
     print("Le robot attend une instructions")
-    time.sleep(t)
+    time.sleep(0.05)
     newKey,val = getKey()
     event = "Pause"
     nao.arreter()
@@ -137,6 +151,8 @@ def Pause():
             event = "Dabe"
         if val == "r":
             event = "TirG"
+        if val == "x":
+            event = "Backward"
     return event
             
 def DoDemarrer():
@@ -160,6 +176,9 @@ def DoDemarrer():
             event = "TirG"
         if val == "g":
             event = "Dabe"
+        if val == "x":
+            event = "Backward"
+        
             
     return event
 
@@ -227,12 +246,14 @@ if __name__== "__main__":
     f.add_state("TirerGauche")
     f.add_state ("End")
     f.add_state("Dab")
+    f.add_state("Reculer")
     # add here all the states you need
     # ...
 
     # defines the events 
     f.add_event ("Wait") # example
     f.add_event ("Walk")
+    f.add_event ("Backward")
     f.add_event ("Demarrer")
     f.add_event ("Turn Right")
     f.add_event ("Turn left")
@@ -269,6 +290,10 @@ if __name__== "__main__":
     f.add_transition ("Mission", "Dab", "Dabe", DoDab)
     f.add_transition ("Idle", "Dab", "Dabe", DoDab)
     f.add_transition ("Avancer", "Dab","Dabe", DoDab)
+    
+    f.add_transition ("Mission", "Reculer", "Backward", DoReculer)
+    f.add_transition ("Reculer","Reculer", "Backward", DoReculer)
+    f.add_transition ("Reculer","Mission", "Pause", Pause)
     
     f.add_transition ("Dab","Mission","Pause", Pause)
     # add here all the transitions you need

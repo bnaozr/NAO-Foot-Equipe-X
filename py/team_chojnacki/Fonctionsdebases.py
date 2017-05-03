@@ -42,10 +42,10 @@ class nao():
         self.memoryProxy = None
 #        robotIp = "172.20.12.134"
 #        robotPort= 9559
-#        robotIp="localhost"
-#        robotPort=11212
-        robotIp = "172.20.28.198"
-        robotPort = 9559
+        robotIp="localhost"
+        robotPort=11212
+#        robotIp = "172.20.28.198"
+#        robotPort = 9559
         
         # Init proxies.
         try:
@@ -86,13 +86,18 @@ class nao():
     
     
     def avancer(self):  
-        self.motionProxy.setWalkTargetVelocity(1, 0, 0, 0.01)
+        self.motionProxy.setWalkTargetVelocity(1, 0, 0, 0.8)
 #        Left = self.memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
 #        Right = self.memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value") 
 #        if Left > Right and Right < 0.5 :
 #            self.tournerDroite()
 #        if Right > Left and Left <0.5:
 #            self.tournerGauche()
+
+    def reculer (self):
+        
+        self.motionProxy.setWalkTargetVelocity(-1,0,0,0.8)
+        
     def tournerGauche(self):
         self.motionProxy.setWalkTargetVelocity(0, .0, math.pi/4, 0.01)
 #        self.motionProxy.moveTo (0,0,math.pi/4)
