@@ -8,10 +8,6 @@ import math
 robotIp="localhost"
 robotPort=11212
 
-if len(sys.argv) == 3:
-    robotIp=sys.argv[1]
-    robotPort=int(sys.argv[2])
-
 # Init proxies.
 try:
     motionProxy = ALProxy("ALMotion", robotIp, robotPort)
@@ -28,7 +24,7 @@ except Exception, e:
 motionProxy.wakeUp()
 motionProxy.setStiffnesses("Body", 1.0)
 
-fractSpeed=0.5
+fractSpeed=0.8
 #postureProxy.goToPosture("StandZero", fractSpeed)
 #time.sleep(2.0)
 
