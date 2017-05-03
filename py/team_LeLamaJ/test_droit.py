@@ -12,7 +12,6 @@ import time
 import math
 from naoqi import ALProxy
 
-robotIP = '172.20.28.198'
 
 def StiffnessOn(proxy):
     # We use the "Body" name to signify the collection of all joints
@@ -33,6 +32,12 @@ def main(robotIP):
         proxy = ALProxy("ALMotion", robotIP, 9559)
     except Exception as e:
         print ("Could not create proxy to ALMotion")
+        print ("Error was: ", e)
+        
+    try:
+        TextToSpeech = ALProxy("ALTextToSpeech", robotIP, 9559)
+    except Exception as e:
+        print ("Could not create proxy to TextToSpeech")
         print ("Error was: ", e)
 
     try:
@@ -83,7 +88,7 @@ def main(robotIP):
     dwy     = 5.0*math.pi/180.0    # rotation axis Y (radian)
 
 
-    times   = [2.0, 2.7, 4.5]
+    times   = [1.0, 1.25, 3.25]
     isAbsolute = False
 
     targetList = [
@@ -93,9 +98,10 @@ def main(robotIP):
 
     proxy.positionInterpolation(effectorName, space, targetList,
                                  axisMask, times, isAbsolute)
-    proxy.say("I'm groot")
+    
+    TextToSpeech.say("Je s'appelle Groot")
 
-#    # Example showing how to Enable Effector Control as an Optimization
+#    # Example showing how to Enable Effect20.28.198'or Control as an Optimization
 #    isActive     = False
 #    proxy.wbEnableEffectorOptimization(effectorName, isActive)
 #
@@ -124,7 +130,7 @@ def main(robotIP):
 
 
 if __name__ == "__main__":
-    robotIp = "172.20.28.198"
+    robotIp = "172.20.16.13"
 
     if len(sys.argv) <= 1:
         print ("Usage python motion_wbKick.py robotIP (optional default: 127.0.0.1)")
