@@ -21,18 +21,6 @@ robotPort4=11218
 
 security_distance = 0.2
 
-#  Enter : event "Start"
-#  s : event "Stop"
-
-#  c : event "Wait"
-
-#  z : event "Go"
-#  q : event "Turn_left"
-#  d : event "Turn_right"
-#  a : event "SideStep_Left"
-#  e : event "SideStep_Right"
-
-# draw a little area (to fucus on to get keys)
 pygame.display.set_mode((100, 100))
 
 f = fsm.fsm();  # finite state machine
