@@ -3,6 +3,7 @@ Equipe X : ENSTA Bretagne UV 2.7
 
 Base de départ pour la compétition NAO Foot UV 2.7 2017
 
+<<<<<<< HEAD
 Trois nouveaux scénarios (dans le dossier scenes) vont vous aider à réaliser votre application 
 - nao-UV27-2017-foot-1-robot.ttt  : Terrain, balle et un robot (port 11212)
 - nao-UV27-2017-foot-2-robots.ttt : Terrain, balle et 2 robots (ports 11212 et 11216)
@@ -37,3 +38,6 @@ git push
 
 
 >>>>>>> 02269d99bcb06a229c008328639b905e919bdc39
+=======
+ensta bretagne
+>>>>>>> f62c3b0d102ac6d0d654226cda3a65a2376f1280
