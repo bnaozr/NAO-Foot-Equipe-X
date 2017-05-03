@@ -14,10 +14,10 @@ import math
 ##
 ## Init proxies.
 
-robotIp = "172.20.12.134"
-robotPort= 9559
-#robotIp="localhost"
-#robotPort=11212
+#robotIp = "172.20.12.134"
+#robotPort= 9559
+robotIp="localhost"
+robotPort=11212
 
 try:
     motionProxy = ALProxy("ALMotion", robotIp, robotPort)
@@ -44,7 +44,6 @@ class nao():
         self.postureProxy = None
         self.sonarProxy = None
         self.memoryProxy = None
-
         
         # Init proxies.
         try:
@@ -85,13 +84,25 @@ class nao():
     
     
     def avancer(self):  
-        self.motionProxy.setWalkTargetVelocity(1, 0, 0, 0.01)
+
+        self.motionProxy.setWalkTargetVelocity(1, 0, 0, 0.8)
+        
+    def pc_droite(self):  
+        self.motionProxy.setWalkTargetVelocity(0, -1, 0, 0.01)
+    def pc_gauche(self):  
+        self.motionProxy.setWalkTargetVelocity(0, 1, 0, 0.01)
+
 #        Left = self.memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
 #        Right = self.memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value") 
 #        if Left > Right and Right < 0.5 :
 #            self.tournerDroite()
 #        if Right > Left and Left <0.5:
 #            self.tournerGauche()
+
+    def reculer (self):
+        
+        self.motionProxy.setWalkTargetVelocity(-1,0,0,0.8)
+        
     def tournerGauche(self):
         self.motionProxy.setWalkTargetVelocity(0, .0, math.pi/4, 0.01)
 #        self.motionProxy.moveTo (0,0,math.pi/4)
@@ -137,15 +148,15 @@ class nao():
         self.motionProxy.wbFootState(stateName, supportLeg)
     
         # RLeg is optimized
-        effectorName = "RLeg"
+        effectorName = "RLeg" 
         axisMask     = 63
         space        = motion.FRAME_ROBOT
     
     
         # Motion of the RLeg
-        dx      = 0.065                # translation axis X (meters)
-        dz      = 0.07               # translation axis Z (meters)
-        dwy     =5*math.pi/180.0    # rotation axis Y (radian)
+        dx      = 0.08                # translation axis X (meters)
+        dz      = 0.08               # translation axis Z (meters)
+        dwy     =7*math.pi/180.0    # rotation axis Y (radian)
     
     
         times   = [1.0, 1.35, 2.25]
@@ -244,9 +255,9 @@ class nao():
     
     
         # Motion of the RLeg
-        dx      = 0.065              # translation axis X (meters)
-        dz      = 0.07             # translation axis Z (meters)
-        dwy     =5*math.pi/180.0    # rotation axis Y (radian)
+        dx      = 0.08                # translation axis X (meters)
+        dz      = 0.08               # translation axis Z (meters)
+        dwy     =7*math.pi/180.0     # rotation axis Y (radian)
     
     
         times   = [1.0, 1.35, 2.25]
@@ -272,7 +283,7 @@ class nao():
     def dab(self):
         
         self.motionProxy.setStiffnesses("Body", 1.0)
-        self.postureProxy.goToPosture("StandInit", 0.5)
+        self.postureProxy.goToPosture("Crouch", 0.3)
     
         # Example showing how to set angles, using a fraction of max speed
         names  = ["Body"]
@@ -289,14 +300,14 @@ class nao():
         
         self.motionProxy.setStiffnesses("Body", 1.0)
     
-        time.sleep(3.0)
-        self.motionProxy.setStiffnesses("Body", 1.0)
-        angles = [0.09966802597045898, 0.5092461109161377, 1.1565940380096436, 1.2839161157608032, -1.4742159843444824, -0.04597806930541992, 0.18250393867492676, 0.785599946975708, -0.2730100154876709, 0.21326804161071777, -0.8743381500244141, 2.112546443939209, -1.1842899322509766, 0.06753802299499512, -0.2730100154876709, 0.13810205459594727, -0.4418339729309082, 1.7349958419799805, -1.1136419773101807, 0.12582993507385254, -0.420274019241333, -1.115260124206543, 1.7533200979232788, 0.5093300342559814, -1.8238691091537476, 0.6979999542236328]
+#        time.sleep(3.0)
+#        self.motionProxy.setStiffnesses("Body", 1.0)
+#        angles = [0.09966802597045898, 0.5092461109161377, 1.1565940380096436, 1.2839161157608032, -1.4742159843444824, -0.04597806930541992, 0.18250393867492676, 0.785599946975708, -0.2730100154876709, 0.21326804161071777, -0.8743381500244141, 2.112546443939209, -1.1842899322509766, 0.06753802299499512, -0.2730100154876709, 0.13810205459594727, -0.4418339729309082, 1.7349958419799805, -1.1136419773101807, 0.12582993507385254, -0.420274019241333, -1.115260124206543, 1.7533200979232788, 0.5093300342559814, -1.8238691091537476, 0.6979999542236328]
     
-        fractionMaxSpeed  = 0.1
-        self.motionProxy.setAngles(names, angles, fractionMaxSpeed)
-       
-        self.motionProxy.setStiffnesses("Body", 1.0)
+#        fractionMaxSpeed  = 0.1
+#        self.motionProxy.setAngles(names, angles, fractionMaxSpeed)
+#       
+#        self.motionProxy.setStiffnesses("Body", 1.0)
     
         time.sleep(3.0)
         self.motionProxy.setStiffnesses("Body", 1.0)
@@ -306,15 +317,15 @@ class nao():
         self.motionProxy.setAngles(names, angles, fractionMaxSpeed)
         time.sleep(3.0)
         self.motionProxy.setStiffnesses("Body", 1.0) 
-        fractionMaxSpeed  = 1
-        for i in range(5):
+        fractionMaxSpeed  = 2
+        for i in range(3):
         	self.motionProxy.closeHand('RHand')
-        	time.sleep(0.1)
-        	motionProxy.openHand('RHand')
+        	time.sleep(0.05)
+        	self.motionProxy.openHand('RHand')
         time.sleep(0.1)
         
     def veille(self): 
         fractSpeed=0.3
-        self.postureProxy.goToPosture("Crouch", fractSpeed)
+        self.postureProxy.goToPosture("Crouch", 0.3)
         self.motionProxy.setStiffnesses("Body", 0.0)
         self.motionProxy.rest()
