@@ -15,7 +15,7 @@ robotPORT=9559
 #9559 pour robot reel
 
 
-robotIP = "172.20.16.13"
+robotIP = "172.20.28.60"
 #127.0.0.1 pour simulateur
 
 #11212 pour simulateur
@@ -29,7 +29,7 @@ memoryProxy = ALProxy("ALMemory", robotIP, robotPORT)
 tts = ALProxy("ALTextToSpeech", robotIP, robotPORT)
 tts.setLanguage("French")
 tts.setVolume(1.0)
-tts.say("Joueons au foot") 
+tts.say("") 
 
 sonarProxy = ALProxy("ALSonar", robotIP, robotPORT)
 sonarProxy.subscribe("myApplication")
@@ -134,9 +134,9 @@ def doavancer():
         if val=="w":
             event="w"  # new event if key "w" is pressed
         elif val=="cdf":
-            event=="cdf"
+            event="cdf"
         elif val=="cgf":
-            event=="cgf"
+            event="cgf"
     return event # return event to be able to define the transition
 # define here all the other functions (actions) of the fsm 
 
@@ -150,9 +150,9 @@ def doreculer():
         if val=="w":
             event="w"  # new event if key "w" is pressed
         elif val=="cdb":
-            event=="cdb"
+            event="cdb"
         elif val=="cgb":
-            event=="cgb"
+            event="cgb"
     return event # return event to be able to define the transition
 # ...
 def doleft():
@@ -164,6 +164,10 @@ def doleft():
     if newKey:
         if val=="w":
             event="w"  # new event if key "w" is pressed
+        elif val=="cgb":
+            event="cgb"
+        elif val=="cgf":
+            event="cgf"
     return event # return event to be able to define the transition
     
 
@@ -178,6 +182,10 @@ def doright():
     if newKey:
         if val=="w":
             event="w"  # new event if key "w" is pressed
+        elif val=="cdb":
+            event="cdb"
+        elif val=="cdf":
+            event="cdf"
     return event # return event to be able to define the transition
     
 def dostop():
@@ -250,6 +258,8 @@ def doCourbeDroiteFwd():
             event="g"  # new event if key "Right" is pressed
         elif val=="w":
             event="w"
+        elif val=="r":
+            event="r"
     return event   
     
     
@@ -264,6 +274,8 @@ def doCourbeGaucheFwd():
             event="g"  # new event if key "Go" is pressed
         elif val=="w":
             event="w"
+        elif val=="l":
+            event="l"
     return event 
     
 def doCourbeDroiteBwd():
@@ -277,6 +289,8 @@ def doCourbeDroiteBwd():
             event="b"  # new event if key "Go" is pressed
         elif val=="w":
             event="w"
+        elif val=="r":
+            event="r"
     return event 
     
 def doCourbeGaucheBwd():
@@ -290,6 +304,8 @@ def doCourbeGaucheBwd():
             event="b"  # new event if key "Go" is pressed
         elif val=="w":
             event="w"
+        elif val=="l":
+            event="l"
     return event 
 
 def doPasChassesGauche():
@@ -317,7 +333,7 @@ def Esquive():
     sonar_right=memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value")
     dmini=min(sonar_left,sonar_right)
     print(type(dmini),dmini)
-    if dmini < 0.5 and dmini>0.3:
+    if dmini < 0.4 and dmini>0.25:
         print("SONAR LOIN", sonar_left,sonar_right)
         f.event="w"
         motionProxy.setWalkTargetVelocity(0,0,0,0)
@@ -326,7 +342,7 @@ def Esquive():
         else:
             motionProxy.setWalkTargetVelocity(0.8,0,0.5,0.5)
         time.sleep(0.5)
-    elif dmini<0.3:
+    elif dmini<0.25:
         print("SONARS PROCHE", sonar_left,sonar_right)
         f.event="w"
         if abs(sonar_left-sonar_right)<0.005:
@@ -346,6 +362,7 @@ if __name__== "__main__":
     f.add_state("rotation_G")
     f.add_state("rotation_D")
     f.add_state("avancer")
+    f.add_state("reculer")
     f.add_state("stop")
     f.add_state("tir_du_gauche")
     f.add_state("tir_du_droit")
@@ -407,10 +424,10 @@ if __name__== "__main__":
     f.add_transition ("courbe_gauche_avant","avancer","g",doavancer)
     f.add_transition ("courbe_droite_arriere","reculer","b",doreculer)
     f.add_transition ("courbe_gauche_arriere","reculer","b",doreculer)   
-    f.add_transition ("avant","courbe_droite_avant","cdf",doCourbeDroiteFwd)    #marron
-    f.add_transition ("avant","courbe_gauche_avant","cgf",doCourbeGaucheFwd)
-    f.add_transition ("arriere","courbe_droite_arriere","cdb",doCourbeDroiteBwd)
-    f.add_transition ("arriere","courbe_gauche_arriere","cgb",doCourbeGaucheBwd)
+    f.add_transition ("avancer","courbe_droite_avant","cdf",doCourbeDroiteFwd)    #marron
+    f.add_transition ("avancer","courbe_gauche_avant","cgf",doCourbeGaucheFwd)
+    f.add_transition ("reculer","courbe_droite_arriere","cdb",doCourbeDroiteBwd)
+    f.add_transition ("reculer","courbe_gauche_arriere","cgb",doCourbeGaucheBwd)
     f.add_transition ("Idle","pas_chasses_droite","pcd",doPasChassesDroite)    #les pas chasses
     f.add_transition ("Idle","pas_chasses_gauche","pcg",doPasChassesGauche)
     f.add_transition ("pas_chasses_droite","Idle","w",dowait)        
@@ -421,7 +438,14 @@ if __name__== "__main__":
     f.add_transition ("courbe_gauche_avant","courbe_gauche_avant","cgf",doCourbeGaucheFwd)
     f.add_transition ("courbe_droite_arriere","courbe_droite_arriere","cdb",doCourbeDroiteBwd)
     f.add_transition ("courbe_gauche_arriere","courbe_gauche_arriere","cgb",doCourbeGaucheBwd)
-    
+    f.add_transition ("courbe_gauche_avant","rotation_G","l",doleft)
+    f.add_transition ("courbe_gauche_arriere","rotation_G","l",doleft)
+    f.add_transition ("rotation_G","courbe_gauche_avant","cgf",doCourbeGaucheFwd)
+    f.add_transition ("rotation_G","courbe_gauche_arriere","cgb",doCourbeGaucheBwd)
+    f.add_transition ("courbe_droite_avant","rotation_D","r",doright)
+    f.add_transition ("courbe_droite_arriere","rotation_D","r",doright)
+    f.add_transition ("rotation_D","courbe_droite_avant","cdf",doCourbeDroiteFwd)
+    f.add_transition ("rotation_D","courbe_droite_arriere","cdb",doCourbeDroiteBwd)
     # initial state
     f.set_state ("Idle") # ... replace with your initial state
     # first event

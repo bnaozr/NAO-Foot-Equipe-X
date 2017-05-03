@@ -73,12 +73,12 @@ def main(robotIP):
 
 
     # Motion of the RLeg
-    dx      = 0.1                # translation axis X (meters)
-    dz      = 0.05                 # translation axis Z (meters)
-    dwy     = 6.0*math.pi/180.0    # rotation axis Y (radian)
+    dx      = 0.1                # translation axis X (meters)  0.1
+    dz      = 0.08                # translation axis Z (meters) 0.05
+    dwy     = 6.0*math.pi/180.0    # rotation axis Y (radian)  6
 
 
-    times   = [2.0, 2.7, 4.5]
+    times   = [2.0, 2.7, 4.5]   #2,2.7,4.5
     isAbsolute = False
 
     targetList = [
@@ -96,7 +96,7 @@ def main(robotIP):
 
     # Com go to LLeg
     supportLeg = "RLeg"
-    duration   = 2.0
+    duration   = 1.2  #2
     proxy.wbGoToBalance(supportLeg, duration)
 
     # RLeg is free
@@ -107,19 +107,19 @@ def main(robotIP):
     effectorName = "LLeg"
     proxy.positionInterpolation(effectorName, space, targetList,
                                 axisMask, times, isAbsolute)
-    time.sleep(1.0)
+    time.sleep(0.3)
 
     # Deactivate Head tracking
     isEnabled    = False
     proxy.wbEnable(isEnabled)
 
     # send robot to Pose Init
-    postureProxy.goToPosture("StandInit", 0.5)
+    postureProxy.goToPosture("StandInit", 0.2)  #0.2
 
 
 if __name__ == "__main__":
-    robotIp = "localhost"
-    robotPort=11212
+    robotIp = "localhost"  #localhost ou 172.20.14.200
+    robotPort=11212 #11212 ou 9559
 
     if len(sys.argv) <= 1:
         print "Usage python motion_wbKick.py robotIP (optional default: 127.0.0.1)"
