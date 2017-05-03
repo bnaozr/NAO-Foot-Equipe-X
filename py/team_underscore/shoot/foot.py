@@ -11,8 +11,9 @@ import time
 
 import almath
 
-robotIp="172.20.13.134"
-robotPort=9559
+if __name__ == "__main__":
+	robotIp="172.20.12.165"
+	robotPort=9559
 
 #if len(sys.argv) < 2:
 #	robotIp="localhost"
@@ -26,44 +27,44 @@ robotPort=9559
 #	robotPort=11212	
 
 
-if (len(sys.argv) >= 2):
-    robotIp = sys.argv[1]
-if (len(sys.argv) >= 3):
-    robotPort = int(sys.argv[2])
+	if (len(sys.argv) >= 2):
+    		robotIp = sys.argv[1]
+	if (len(sys.argv) >= 3):
+    		robotPort = int(sys.argv[2])
 
-print robotIp
-print robotPort
+	print robotIp
+	print robotPort
 
 # Init proxies.
-try:
-    motionProxy = ALProxy("ALMotion", robotIp, robotPort)
-except Exception, e:
-    print "Could not create proxy to ALMotion"
-    print "Error was: ", e
+	try:
+    		motionProxy = ALProxy("ALMotion", robotIp, robotPort)
+	except Exception, e:
+    		print "Could not create proxy to ALMotion"
+    		print "Error was: ", e
 
-try:
-    postureProxy = ALProxy("ALRobotPosture", robotIp, robotPort)
-except Exception, e:
-    print "Could not create proxy to ALRobotPosture"
-    print "Error was: ", e
+	try:
+    		postureProxy = ALProxy("ALRobotPosture", robotIp, robotPort)
+	except Exception, e:
+    		print "Could not create proxy to ALRobotPosture"
+    		print "Error was: ", e
 
-try:
-    voicePxy = ALProxy("ALTextToSpeech", robotIp, robotPort)
-except Exception, e:
-    print "Could not create proxy to text2speech"
-    print "Error was: ", e
+	try:
+    		voicePxy = ALProxy("ALTextToSpeech", robotIp, robotPort)
+	except Exception, e:
+    		print "Could not create proxy to text2speech"
+    		print "Error was: ", e
 
-try:
-    memoryProxy = ALProxy("ALMemory", robotIp, robotPort)
-except Exception, e:
-    print "Could not create proxy to ALMemory"
-    print "Error was: ", e
+	try:
+    		memoryProxy = ALProxy("ALMemory", robotIp, robotPort)
+	except Exception, e:
+    		print "Could not create proxy to ALMemory"
+    		print "Error was: ", e
 
-try:
-    sonarProxy = ALProxy("ALSonar", robotIp, robotPort)
-except Exception, e:
-    print "Could not create proxy to ALSonar"
-    print "Error was: ", e
+	try:
+    		sonarProxy = ALProxy("ALSonar", robotIp, robotPort)
+	except Exception, e:
+		print "Could not create proxy to ALSonar"
+		print "Error was: ", e
 
 def StiffnessOn(proxy):
     # We use the "Body" name to signify the collection of all joints
@@ -174,7 +175,7 @@ def sideLeftShoot():
 	robot = Robot(1, isAbsolute, axisMask, space)
 
 
-	robot.mvt("Torso", [0.0,  -0.088,  0.0, 0.0, 0.0, 0.0])
+	robot.mvt("Torso", [0.0,  -0.083,  0.0, 0.0, 0.0, 0.0])
 	robot.mvt(effectorF, [0.0,  0.0,  0.05, 0.0, 0.0, 0.0])
 	robot.changeReferenceTimeForNextAction(0.25)
 	robot.mvt(effectorF, [0.0,  0.08,  0.0, 0.0, 0.0, 0.0])		
