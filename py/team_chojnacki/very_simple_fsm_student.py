@@ -4,6 +4,7 @@ import sys
 import select
 import Fonctionsdebases as fdb
 import pygame
+from naoqi import ALProxy
 t = 0.05
 # use keyboard to control the fsm
 #  z : event 'haut'
@@ -18,7 +19,7 @@ nao = fdb.nao()
 pygame.init()
 pygame.display.set_mode((100, 100))
 
-
+tts = ALProxy("ALTextToSpeech", fdb.robotIp, fdb.robotPort)
 
 
 #def isData():
@@ -64,6 +65,10 @@ def getKey():
                 return True, 'r'
             elif event.key == pygame.K_g:
                 return True, 'g'
+            elif event.key == pygame.K_RIGHT:
+                return True, 'pcd'
+            elif event.key == pygame.K_LEFT:
+                return True, 'pcg'
             elif event.key == pygame.K_x:
                 return True, 'x'
             
@@ -122,6 +127,28 @@ def DoMarcher():
         if val =="s":
             event = "Pause"
     return event
+
+def DoPCD():
+    print ('pas chasse droite')
+    time.sleep(t)
+    newKey,val = getKey()
+    event ="PCDe"
+    nao.pc_droite()
+    if newKey : 
+        if val =="s":
+            event = "Pause"
+    return event
+    
+def DoPCG():
+    print ('pas chasse gauche')
+    time.sleep(t)
+    newKey,val = getKey()
+    event ="PCGe"
+    nao.pc_gauche()
+    if newKey : 
+        if val =="s":
+            event = "Pause"
+    return event
     
 def DoReculer():
     print ('Le robot recule')
@@ -155,6 +182,10 @@ def Pause():
             event = "Dabe"
         if val == "r":
             event = "TirG"
+        if val == "pcd":
+            event = "PCDe"
+        if val == "pcg":
+            event = "PCGe"
         if val == "x":
             event = "Backward"
     return event
@@ -180,6 +211,10 @@ def DoDemarrer():
             event = "TirG"
         if val == "g":
             event = "Dabe"
+        if val == "pcd":
+            event = "PCDe"
+        if val == "pcg":
+            event = "PCGe"
         if val == "x":
             event = "Backward"
         
@@ -235,6 +270,7 @@ def DoDab():
     newKey,val = getKey()
     event = "Dabe"
     nao.dab()
+    tts.say("jefectue le dab")
     event = "Pause"
     return event 
     
@@ -250,6 +286,8 @@ if __name__== "__main__":
     f.add_state("TirerGauche")
     f.add_state ("End")
     f.add_state("Dab")
+    f.add_state("PCD")
+    f.add_state("PCG")
     f.add_state("Reculer")
     # add here all the states you need
     # ...
@@ -264,9 +302,10 @@ if __name__== "__main__":
     f.add_event ("Fin")
     f.add_event ("Pause")
     f.add_event ("TirD")
-    f.add_event ("TirG")
+    f.add_event ("TirG")    
     f.add_event ("Dabe")
-    
+    f.add_event ("PCDe")
+    f.add_event ("PCGe")
     # add here all the events you need
     # ...
    
@@ -280,8 +319,8 @@ if __name__== "__main__":
     f.add_transition ("Mission", "End", "Fin", DoEnd)
     f.add_transition ("TirerDroit","Mission","Pause", Pause)
     f.add_transition ("TirerGauche","Mission","Pause", Pause)
-    f.add_transition("Mission","TirerDroit","TirD", DoTirD)
-    f.add_transition("Mission","TirerGauche","TirG", DoTirG)
+    f.add_transition ("Mission","TirerDroit","TirD", DoTirD)
+    f.add_transition ("Mission","TirerGauche","TirG", DoTirG)
     f.add_transition ("Avancer","Mission", "Pause", Pause)
     f.add_transition ("Tourner a gauche","Mission", "Pause", Pause)
     f.add_transition ("Tourner a droite","Mission", "Pause", Pause)
@@ -290,6 +329,14 @@ if __name__== "__main__":
     f.add_transition ("Tourner a gauche", "Tourner a gauche", "Turn left", DoTurnLeft)
     f.add_transition ("Tourner a droite","Tourner a droite", "Turn right", DoTurnRight)
     f.add_transition ("Mission", "Mission", "Demarrer", DoDemarrer)
+    f.add_transition ("Mission","PCD","PCDe", DoPCD)
+    f.add_transition ("PCD","PCD","PCDe", DoPCD)
+    f.add_transition ("PCG", "Mission", "Pause", Pause)
+    f.add_transition ("PCD", "Mission", "Pause", Pause)
+    f.add_transition ("Mission","PCG","PCGe", DoPCG)
+    f.add_transition ("PCG","PCG","PCGe", DoPCG)
+
+    
     
     f.add_transition ("Mission", "Dab", "Dabe", DoDab)
     f.add_transition ("Idle", "Dab", "Dabe", DoDab)
