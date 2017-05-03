@@ -24,6 +24,8 @@ motionProxy.wakeUp()
 postureProxy.goToPosture("StandInit", 0.5)
 motionProxy.setWalkArmsEnabled(True, True)
 motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
+motionProxy.setFallManagerEnabled(True)
+
 def eviter():
     sonarProxy = ALProxy("ALSonar", robotIp, robotPort)
     sonarProxy.subscribe("myApplication")

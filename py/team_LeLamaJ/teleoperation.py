@@ -132,6 +132,7 @@ def doStart():
     return event 
 
 def doStop():
+    tts.say("Rentre chez ta maman elle t'a fait des crepes")
     print("Au revoir !")
     nc.veille()
     
@@ -256,7 +257,7 @@ def doGo_Back():
     return event
 
 def doShoot_Right():
-    tts.say("Les ENSIETA baisent comme des dieux")
+    tts.say("T'as pas d'osse")
     print(">>>>>> action : shoot right")
     td.main(robotIp)
     newKey,val = getKey(); 
