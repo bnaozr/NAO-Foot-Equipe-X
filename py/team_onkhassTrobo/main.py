@@ -69,8 +69,8 @@ def initNet(robotIP,robotPort):
 
 
 if __name__ =="__main__":
-    robotIp = "172.20.13.134"
-    robotPort = 9559
+    robotIp = "localhost"
+    robotPort = 11212
 
     if len(sys.argv) <= 1:
         print "Usage python motion_setFootStepDance.py robotIP (optional default: 127.0.0.1)"
@@ -133,9 +133,8 @@ def getKey():
 # functions (actions of the fsm)
 # example of a function doRun
 def doRun():
-    if  not detection_obstacleRight() :
-        x=0.2
-        motionProxy.moveTo (x, y, theta)# do some work
+    x=0.2
+    motionProxy.moveTo (x, y, theta)# do some work
     sleep(deltat)
     newKey,val = getKey() # check if key pressed
     event="Wait" # define the default event
@@ -257,10 +256,6 @@ def doShoot():
 
 
 
-# Fonction de detection d obstacles
-
-
-
 
 if __name__== "__main__":
 
@@ -320,6 +315,8 @@ if __name__== "__main__":
 
     f.add_transition ("Shooting","Shooting","Shoot",doShoot)
     f.add_transition ("Shooting","Waiting","Wait",doWait)
+    f.add_transition ("Shooting","Turning_Right","Right",doRight)
+    f.add_transition ("Shooting","Turning_Left","Left",doLeft)
 
 
 
