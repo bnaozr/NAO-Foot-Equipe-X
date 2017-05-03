@@ -73,17 +73,17 @@ def main(robotIP):
 
 
     # Motion of the RLeg
-    dx      = 0.1                # translation axis X (meters)
-    dz      = 0.05                 # translation axis Z (meters)
-    dwy     = 6.0*math.pi/180.0    # rotation axis Y (radian)
+    dx      = 0.05                # translation axis X (meters)
+    dz      = 0.1                 # translation axis Z (meters)
+    dwy     = 175.0*math.pi/180.0    # rotation axis Y (radian)
 
 
     times   = [2.0, 2.7, 4.5]
     isAbsolute = False
 
     targetList = [
-      [-dx, 0.0, dz, 0.0, +dwy, 0.0],
-      [+dx, 0.0, dz, 0.0, 0.0, 0.0],
+      [-3*dx, 0.0, 2*dz, 0.0, +dwy, 0.0],
+      [+2*dx, 0.0, dz, 0.0, 0.0, 0.0],
       [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
 
     proxy.positionInterpolation(effectorName, space, targetList,

@@ -29,7 +29,7 @@ memoryProxy = ALProxy("ALMemory", robotIP, robotPORT)
 tts = ALProxy("ALTextToSpeech", robotIP, robotPORT)
 tts.setLanguage("French")
 tts.setVolume(1.0)
-tts.say("") 
+#tts.say("Salut les schlagz ! C'est la team Fabrice sa glisse mamaine") 
 
 sonarProxy = ALProxy("ALSonar", robotIP, robotPORT)
 sonarProxy.subscribe("myApplication")
@@ -338,19 +338,19 @@ def Esquive():
         f.event="w"
         motionProxy.setWalkTargetVelocity(0,0,0,0)
         if sonar_left<sonar_right:
-            motionProxy.setWalkTargetVelocity(0.8,0,-0.5,0.5)
+            motionProxy.setWalkTargetVelocity(0.5,0,-0.5,0.5)
         else:
-            motionProxy.setWalkTargetVelocity(0.8,0,0.5,0.5)
+            motionProxy.setWalkTargetVelocity(0.5,0,0.5,0.5)
         time.sleep(0.5)
     elif dmini<0.25:
         print("SONARS PROCHE", sonar_left,sonar_right)
         f.event="w"
         if abs(sonar_left-sonar_right)<0.005:
-            motionProxy.setWalkTargetVelocity(-1,0,0,0.5)
+            motionProxy.setWalkTargetVelocity(-0.5,0,0,0.5)
         elif sonar_left<sonar_right:
-            motionProxy.setWalkTargetVelocity(-1,0,-0.5,0.5)
+            motionProxy.setWalkTargetVelocity(-0.5,0,-0.5,0.5)
         else:
-            motionProxy.setWalkTargetVelocity(-1,0,0.5,0.5)
+            motionProxy.setWalkTargetVelocity(-0.5,0,0.5,0.5)
         time.sleep(0.5)
 
  
@@ -460,7 +460,7 @@ if __name__== "__main__":
     # fsm loop
     run = True   
     while (run):
-        Esquive()
+        #Esquive()
         funct = f.run () # function to be executed in the new state
         if f.curState != end_state:
             newEvent = funct() # new event when state action is finished
