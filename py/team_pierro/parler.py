@@ -3,11 +3,12 @@ import time
 tts = ALProxy("ALTextToSpeech", "172.20.12.134", 9559)
 
 
-tts.say("il a pas dit bonjour")
-
-tts.say("du coup")
 
 
-tts.say("il s'est fait niquer sa mere")
 
 
+
+tts.say("lor n zo"   )
+tts.say("d barque foutre la merde")
+tts.say("on saccage la barak")
+tts.say("on va fumer votre herbe")
