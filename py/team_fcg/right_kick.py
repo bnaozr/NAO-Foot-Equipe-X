@@ -8,6 +8,8 @@ import time
 import math
 from naoqi import ALProxy
 
+robotPORT=9559
+robotIP = "172.20.14.200"
 
 def StiffnessOn(proxy):
     # We use the "Body" name to signify the collection of all joints
