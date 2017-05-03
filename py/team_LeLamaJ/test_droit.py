@@ -98,7 +98,7 @@ def main(robotIP):
 
     proxy.positionInterpolation(effectorName, space, targetList,
                                  axisMask, times, isAbsolute)
-    
+
     TextToSpeech.say("Je s'appelle Groot")
 
 #    # Example showing how to Enable Effect20.28.198'or Control as an Optimization
