@@ -12,7 +12,7 @@ pygame.init()
 # draw a little area (to focus on to get keys)
 pygame.display.set_mode((100, 100))
 
-robotIp="172.20.28.198"
+robotIp="172.20.16.13"
 robotPort=9559
 tts = ALProxy("ALTextToSpeech", robotIp, robotPort)
 
