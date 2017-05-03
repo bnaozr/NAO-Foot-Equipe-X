@@ -1,4 +1,4 @@
-import func_file
+#import func_file
 import motion_walk
 import naocrouch
 
@@ -26,23 +26,23 @@ class fsm():
 
     def set_event(self, event):
         self.curEvent = event
-    
+
     def create(self):
         self.add_event('z')
         self.add_event('c')
         self.add_state('walking')
         self.add_state('crouching')
-    
+
         self.set_event(self.events[1])
-        self.set_state(self.states[1])        
-            
+        self.set_state(self.states[1])
+
         for sta in self.states:
             for sta2 in self.states:
                 if sta != sta2:
                     if sta2 == 'walking':
                         self.add_transition(sta , sta2 , 'z' , motion_walk.main)
                     elif sta2 == 'crouching':
-                        self.add_transition(sta , sta2 , 'c' , naocrouch.main)    
+                        self.add_transition(sta , sta2 , 'c' , naocrouch.main)
 
     def run(self):
         event = self.curEvent
@@ -56,7 +56,7 @@ class fsm():
         print(st)
         return self.transitions [key][1]
 
-#    
+#
 #a = fsm()
 #a.add_event('d')
 #a.add_event('z')
@@ -78,6 +78,6 @@ class fsm():
 #                a.add_transition(sta , sta2 , 's' , move_back)
 #            elif sta2 == 'avant':
 #                a.add_transition(sta , sta2 , 'z' , move_forward)
-                
+
 #a.set_event(a.events[0])
 #a.set_state(a.states[1])
