@@ -17,6 +17,10 @@ nao = fdb.nao()
 
 pygame.init()
 pygame.display.set_mode((100, 100))
+
+
+
+
 #def isData():
 #    return select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], [])
 #
