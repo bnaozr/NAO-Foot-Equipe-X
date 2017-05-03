@@ -11,41 +11,39 @@ import time
 from naoqi import ALProxy
 import math
 #
-#robotIp="localhost"
-#robotPort=11212
 ##
 ## Init proxies.
-#try:
-#    motionProxy = ALProxy("ALMotion", robotIp, robotPort)
-#except Exception, e:
-#    print "Could not create proxy to ALMotion"
-#    print "Error was: ", e
+
+robotIp = "172.20.12.134"
+robotPort= 9559
+#robotIp="localhost"
+#robotPort=11212
+
+try:
+    motionProxy = ALProxy("ALMotion", robotIp, robotPort)
+except Exception, e:
+    print "Could not create proxy to ALMotion"
+    print "Error was: ", e
+
+try:
+    postureProxy = ALProxy("ALRobotPosture", robotIp, robotPort)
+except Exception, e:
+    print "Could not create proxy to ALRobotPosture"
+    print "Error was: ", e
+
+motionProxy.wakeUp()
 #
-#try:
-#    postureProxy = ALProxy("ALRobotPosture", robotIp, robotPort)
-#except Exception, e:
-#    print "Could not create proxy to ALRobotPosture"
-#    print "Error was: ", e
+postureProxy.goToPosture("StandInit", 0.5)
 #
-#motionProxy.wakeUp()
+motionProxy.setWalkArmsEnabled(True, True)
 #
-#postureProxy.goToPosture("StandInit", 0.5)
-#
-#motionProxy.setWalkArmsEnabled(True, True)
-#
-#motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
+motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
 class nao():
     def __init__(self):
         self.motionProxy = None
         self.postureProxy = None
         self.sonarProxy = None
         self.memoryProxy = None
-#        robotIp = "172.20.12.134"
-#        robotPort= 9559
-        robotIp="localhost"
-        robotPort=11212
-#        robotIp = "172.20.28.198"
-#        robotPort = 9559
         
         # Init proxies.
         try:
