@@ -12,9 +12,9 @@ Trois nouveaux scénarios (dans le dossier scenes) vont vous aider à réaliser 
 
 (Note la version 4 robots fonctionne quasiment car on atteint les limites du PC de salle info ... sur un PC de gamer ça fonctionne bien)
 
-Synchronisation des projets 
+Si vous n'avez pas fait de pull request avec vos dernières modifications , sauvegarder vos fichier hors git.
 
-Pour les responsables d'équipes:
+Synchronisation des projets :
 
 git remote add upstream https://github.com/bnaozr/NAO-Foot-Equipe-X
 
