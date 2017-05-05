@@ -24,16 +24,22 @@ git pull upstream master
 
 git push
 
-Les fichiers binaires (v-rep, naoqi et python naoqi ne sont plus dans le projet public)
-ils peuvent être récupérés au lien suivant :
+Les fichiers binaires (v-rep, naoqi et python naoqi ne sont plus dans le projet public), les archives (naoqi-20170505.tgz,  pynaoqi-20170505.tgz et  v-rep-20170505.tgz) peuvent être récupérées sur public/share au lien suivant :
 
-https://filesender.renater.fr/?s=download&token=00c6cd31-00ab-ac81-dfc4-b4f62af1affd
+/public/share/uv27rob/
 
 ensuite se placer dans le répertoire NAO-Foot-Equipe-X
 et faire les commandes
-tar xfz yyyy.tgz  
 
+tar xfz pynaoqi-20170505.tgz
 
+tar xfz naoqi-20170505.tgz
+
+tar xfz v-rep-20170505.tgz
+
+il est enuiste conseiller d'effacer les fichiers tgz
+
+-----------------------------------------------
 
 Les membres d'une équipe peuvent se synchroniser au projet global (commandes ci dessus) mais ils peuvent aussi se synchroniser sur le projet de leur responsable (remplacer bill par le responsable d'équipe) :
 
