@@ -11,7 +11,6 @@ import motion
 import time
 import math
 from naoqi import ALProxy
-robotIP = '172.20.16.13'
 
 def StiffnessOn(proxy):
     # We use the "Body" name to signify the collection of all joints
@@ -131,7 +130,6 @@ def main(robotIP):
 
 
 if __name__ == "__main__":
-    robotIp = "172.20.16.13"
 
     if len(sys.argv) <= 1:
         print ("Usage python motion_wbKick.py robotIP (optional default: 127.0.0.1)")
