@@ -11,7 +11,7 @@ import motion
 import time
 import math
 from naoqi import ALProxy
-robotIP = '172.20.16.13'
+robotIP = "172.20.10.35"
 
 def StiffnessOn(proxy):
     # We use the "Body" name to signify the collection of all joints

@@ -5,7 +5,7 @@ from naoqi import ALProxy
 import math
 
 
-robotIp="172.20.16.13"
+robotIp="172.20.10.35"
 robotPort=9559
 
 try:
