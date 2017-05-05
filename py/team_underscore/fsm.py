@@ -155,9 +155,10 @@ class Fsm:
 			valL = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
     			valR = memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value")
 			
-			if (valL < 0.5) or (valR < 0.5):
-				self.control_state = CONTROL_STATE_DODGE
-				self.save_time = time.clock()
+			#if (valL < 0.5) or (valR < 0.5):
+			#	self.control_state = CONTROL_STATE_DODGE
+			#	self.save_time = time.clock()
+
 			#sonarProxy.unsubscribe("SonarApp")
     			#print valL, valR
     #sonarProxy.unsubscribe("SonarApp");
@@ -178,7 +179,7 @@ class Fsm:
 			valL = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
     			valR = memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value")
 			
-			if (valL < 0.5) or (valR < 0.5):
+			if (valL < 0.2) or (valR < 0.2):
 				self.control_state = CONTROL_STATE_DODGE
 				self.save_time = time.clock()
 			#sonarProxy.unsubscribe("SonarApp")
@@ -335,7 +336,7 @@ class Key_listener(Thread):
 					tirD = 1
 					try:
 						self.fsm.next_state = STATE_SHOOTING
-						foot.rightShoot(motionProxy, postureProxy)
+						foot.rightShoot()
 					except Exception as e:
 						print(e)
 					c = STATE_STAND
@@ -348,7 +349,7 @@ class Key_listener(Thread):
 					tirG = self.joy.get_button(2)
 					try:
 						self.fsm.next_state = STATE_SHOOTING
-						foot.leftShoot(motionProxy, postureProxy)
+						foot.leftShoot()
 					except Exception:
 						pass
 					c = STATE_STAND
@@ -361,7 +362,7 @@ class Key_listener(Thread):
 					tirLG = self.joy.get_button(4)
 					try:
 						self.fsm.next_state = STATE_SHOOTING
-						foot.sideLeftShoot(motionProxy, postureProxy)
+						foot.sideLeftShoot()
 					except Exception:
 						pass
 					c = STATE_STAND
@@ -374,7 +375,7 @@ class Key_listener(Thread):
 					tirLD = 1
 					try:
 						self.fsm.next_state = STATE_SHOOTING
-						foot.sideRightShoot(motionProxy, postureProxy)
+						foot.sideRightShoot()
 					except Exception:
 						pass
 					c = STATE_STAND
