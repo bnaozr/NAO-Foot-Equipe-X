@@ -12,7 +12,7 @@ def StiffnessOn(proxy):
     proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
     
 def initialisation():
-    robotIp="172.20.16.13"
+    robotIp="172.20.10.35"
     robotPort=9559
     tts = ALProxy("ALTextToSpeech", robotIp, robotPort)
     
