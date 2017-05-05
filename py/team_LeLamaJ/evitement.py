@@ -5,9 +5,7 @@ from naoqi import ALProxy
 import math
 
 
-"""robotIp="localhost"
-robotPort=11212"""
-robotIp="172.20.28.198"
+robotIp="172.20.16.13"
 robotPort=9559
 
 try:
@@ -26,6 +24,8 @@ motionProxy.wakeUp()
 postureProxy.goToPosture("StandInit", 0.5)
 motionProxy.setWalkArmsEnabled(True, True)
 motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
+motionProxy.setFallManagerEnabled(True)
+
 def eviter():
     sonarProxy = ALProxy("ALSonar", robotIp, robotPort)
     sonarProxy.subscribe("myApplication")
