@@ -47,3 +47,9 @@ git push
 
 
 
+----
+Quelques commentaires libres ...
+
+ensta bretagne
+coucou les loulous ! 
+stratégie de la team : cuillères, tatane et fourchette pas de pitié !!!!!!
