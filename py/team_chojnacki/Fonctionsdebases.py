@@ -85,12 +85,12 @@ class nao():
     
     def avancer(self):  
 
-        self.motionProxy.setWalkTargetVelocity(1, 0, 0, 0.8)
+        self.motionProxy.setWalkTargetVelocity(1, 0, 0, 0.7)
         
     def pc_droite(self):  
-        self.motionProxy.setWalkTargetVelocity(0, -1, 0, 0.01)
+        self.motionProxy.setWalkTargetVelocity(0, -0.7, 0, 0.01)
     def pc_gauche(self):  
-        self.motionProxy.setWalkTargetVelocity(0, 1, 0, 0.01)
+        self.motionProxy.setWalkTargetVelocity(0, 0.7, 0, 0.01)
 
 #        Left = self.memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
 #        Right = self.memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value") 
@@ -101,7 +101,7 @@ class nao():
 
     def reculer (self):
         
-        self.motionProxy.setWalkTargetVelocity(-1,0,0,0.8)
+        self.motionProxy.setWalkTargetVelocity(-1,0,0,0.7)
         
     def tournerGauche(self):
         self.motionProxy.setWalkTargetVelocity(0, .0, math.pi/4, 0.01)
@@ -297,8 +297,8 @@ class nao():
     
         fractionMaxSpeed  = 0.2
         self.motionProxy.setAngles(names, angles, fractionMaxSpeed)
-        
-        self.motionProxy.setStiffnesses("Body", 1.0)
+#        
+#        self.motionProxy.setStiffnesses("Body", 1.0)
     
 #        time.sleep(3.0)
 #        self.motionProxy.setStiffnesses("Body", 1.0)
