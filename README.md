@@ -1,9 +1,10 @@
 ﻿# NAO-Foot-Equipe-X
 Equipe X : ENSTA Bretagne UV 2.7 
 
+
+
 Base de départ pour la compétition NAO Foot UV 2.7 2017
 
-<<<<<<< HEAD
 Trois nouveaux scénarios (dans le dossier scenes) vont vous aider à réaliser votre application 
 - nao-UV27-2017-foot-1-robot.ttt  : Terrain, balle et un robot (port 11212)
 - nao-UV27-2017-foot-2-robots.ttt : Terrain, balle et 2 robots (ports 11212 et 11216)
@@ -23,6 +24,15 @@ git pull upstream master
 
 git push
 
+Les fichiers binaires (v-rep, naoqi et python naoqi ne sont plus dans le projet public)
+ils peuvent être récupérés au lien suivant :
+
+https://filesender.renater.fr/?s=download&token=00c6cd31-00ab-ac81-dfc4-b4f62af1affd
+
+ensuite se placer dans le répertoire NAO-Foot-Equipe-X
+et faire les commandes
+tar xfz yyyy.tgz  
+
 
 
 Les membres d'une équipe peuvent se synchroniser au projet global (commandes ci dessus) mais ils peuvent aussi se synchroniser sur le projet de leur responsable (remplacer bill par le responsable d'équipe) :
@@ -37,7 +47,3 @@ git push
 
 
 
->>>>>>> 02269d99bcb06a229c008328639b905e919bdc39
-=======
-ensta bretagne
->>>>>>> f62c3b0d102ac6d0d654226cda3a65a2376f1280
