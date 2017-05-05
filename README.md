@@ -37,7 +37,7 @@ tar xfz naoqi-20170505.tgz
 
 tar xfz v-rep-20170505.tgz
 
-il est enuiste conseiller d'effacer les fichiers tgz
+il est ensuite recommandé d'effacer les fichiers tgz
 
 -----------------------------------------------
 
