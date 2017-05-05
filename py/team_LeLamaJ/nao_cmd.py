@@ -12,9 +12,7 @@ def StiffnessOn(proxy):
     proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
     
 def initialisation():
-    """robotIp="localhost"
-    robotPort=11212"""
-    robotIp="172.20.28.198"
+    robotIp="172.20.16.13"
     robotPort=9559
     tts = ALProxy("ALTextToSpeech", robotIp, robotPort)
     
@@ -35,6 +33,7 @@ def initialisation():
     StiffnessOn(motionProxy)   
     motionProxy.wakeUp()
     postureProxy.goToPosture("StandInit", 0.5)
+    motionProxy.setFallManagerEnabled(True)
     motionProxy.setWalkArmsEnabled(True, True)
     motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
     tts.say("Je s'appelle Groot")
@@ -53,7 +52,7 @@ def marche_droite():
 def rotation_droite():
     motionProxy.wakeUp()
     postureProxy.goToPosture("StandInit", 0.5)
-    x = 0.2
+    x = 0.0
     y = 0.0
     theta = -math.pi/2.0
     motionProxy.moveTo (x, y, theta)
@@ -61,7 +60,7 @@ def rotation_droite():
 def rotation_gauche():
     motionProxy.wakeUp()
     postureProxy.goToPosture("StandInit", 0.5)
-    x = 0.2
+    x = 0.0
     y = 0.0
     theta = math.pi/2.0
     motionProxy.moveTo (x, y, theta)
@@ -89,7 +88,7 @@ def pas_cote_droit():
 
     stepFrequency = 0.8
     clearExisting = False
-    nbStepDance = 4 
+    nbStepDance = 2 
 
     for j in range( nbStepDance ):
         for i in range( len(footStepsList) ):
@@ -118,7 +117,7 @@ def pas_cote_gauche():
     # Le nao bouge ses pieds un par un 
     stepFrequency = 0.8
     clearExisting = False
-    nbStepDance = 4 # on lui demande de faire 4 pas de cote
+    nbStepDance = 2 # on lui demande de faire 4 pas de cote
 
     for j in range( nbStepDance ):
         for i in range( len(footStepsList) ):
