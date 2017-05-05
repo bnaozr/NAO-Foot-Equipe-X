@@ -11,8 +11,7 @@ def StiffnessOn(proxy):
     pTimeLists = 1.0
     proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
     
-def initialisation():
-    robotIp="172.20.10.35"
+def initialisation(robotIp):
     robotPort=9559
     tts = ALProxy("ALTextToSpeech", robotIp, robotPort)
     
@@ -44,7 +43,7 @@ def veille():
 def marche_droite():
     motionProxy.wakeUp()
     postureProxy.goToPosture("StandInit", 0.5)
-    x = 0.5
+    x = 0.2
     y = 0.0
     theta = 0.0
     motionProxy.moveTo (x, y, theta)
@@ -54,7 +53,7 @@ def rotation_droite():
     postureProxy.goToPosture("StandInit", 0.5)
     x = 0.0
     y = 0.0
-    theta = -math.pi/2.0
+    theta = -math.pi/8.0
     motionProxy.moveTo (x, y, theta)
 
 def rotation_gauche():
@@ -62,13 +61,13 @@ def rotation_gauche():
     postureProxy.goToPosture("StandInit", 0.5)
     x = 0.0
     y = 0.0
-    theta = math.pi/2.0
+    theta = math.pi/8.0
     motionProxy.moveTo (x, y, theta)
 
 def marche_arriere():
     motionProxy.wakeUp()
     postureProxy.goToPosture("StandInit", 0.5)
-    x = -0.5
+    x = -0.2
     y = 0.0
     theta = 0.0
     motionProxy.moveTo (x, y, theta)

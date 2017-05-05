@@ -12,7 +12,7 @@ pygame.init()
 # draw a little area (to focus on to get keys)
 pygame.display.set_mode((100, 100))
 
-robotIp="172.20.10.35"
+robotIp=input(sys.argv[0])
 robotPort=9559
 tts = ALProxy("ALTextToSpeech", robotIp, robotPort)
 
@@ -95,8 +95,8 @@ def doRun():
 
 def doWait():
     print(">>>>>> action : wait")
-    #evitement.eviter()
-    time.sleep(0.5)
+    evitement.eviter(robotIp)
+    time.sleep(0.1)
     newKey,val = getKey(); 
     event="Wait"
     if newKey:
@@ -122,7 +122,7 @@ def doWait():
 
 def doStart():
     print("Bonjour !")
-    nc.initialisation()
+    nc.initialisation(robotIp)
     time.sleep(1.0)
     newKey,val = getKey(); 
     event="Wait"
