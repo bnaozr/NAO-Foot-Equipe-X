@@ -18,11 +18,12 @@ def StiffnessOn(proxy):
 
 
 def main(robotIP):
+
     ''' Example of a whole body kick
     Warning: Needs a PoseInit before executing
              Whole body balancer must be inactivated at the end of the script
     '''
-
+    print 'a'
     # Init proxies.
     try:
         proxy = ALProxy("ALMotion", robotIP, robotPort)
@@ -74,16 +75,16 @@ def main(robotIP):
 
     # Motion of the RLeg
     dx      = 0.1                # translation axis X (meters)  0.1
-    dz      = 0.08                # translation axis Z (meters) 0.05
-    dwy     = 6.0*math.pi/180.0    # rotation axis Y (radian)  6
+    dz      = 1                # translation axis Z (meters) 0.05
+    dwy     = 175.0*math.pi/180.0    # rotation axis Y (radian)  6
 
 
     times   = [2.0, 2.7, 4.5]   #2,2.7,4.5
     isAbsolute = False
 
     targetList = [
-      [-dx, 0.0, dz, 0.0, +dwy, 0.0],
-      [+dx, 0.0, dz, 0.0, 0.0, 0.0],
+      [0, 0.0, 0, 0.0, 0, 0.0],
+      [0, 0.0, 0, 0.0, 0.0, 0.0],
       [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
 
 #    proxy.positionInterpolation(effectorName, space, targetList,
@@ -96,7 +97,7 @@ def main(robotIP):
 
     # Com go to LLeg
     supportLeg = "RLeg"
-    duration   = 1.2  #2
+    duration   = 2  #2
     proxy.wbGoToBalance(supportLeg, duration)
 
     # RLeg is free

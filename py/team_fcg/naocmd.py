@@ -25,6 +25,7 @@ import time
 import math
 from naoqi import ALProxy
 
+
 def StiffnessOn(proxy):
     # We use the "Body" name to signify the collection of all joints
     pNames = "Body"
@@ -198,8 +199,8 @@ def kick_gauche(postureProxy, motionProxy):
 
 
     # Motion of the RLeg
-    dx      = 0.1                # translation axis X (meters)
-    dz      = 0.05                 # translation axis Z (meters)
+    dx      = 0.1              # translation axis X (meters)
+    dz      = 0.09                # translation axis Z (meters)
     dwy     = 6.0*math.pi/180.0    # rotation axis Y (radian)
 
 
